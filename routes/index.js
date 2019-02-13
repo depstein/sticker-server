@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var puppeteer = require('puppeteer');
-var WebMWriter = require('webm-writer');
 
 var testAnimFile = "animations/testanim.webm";
 var testStillFile = "animations/teststill.png";
