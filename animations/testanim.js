@@ -17,7 +17,7 @@ function drawCircle(x){
 var x = 0;
 
 //ccapture setup
-var capturer = new CCapture( { format: 'webm', framerate: 60, quality: 1 } );
+var capturer = new CCapture( { format: 'gif', workersPath: './', framerate: 60, quality: 1 } );
 
 function render(){
   requestAnimationFrame(render);
@@ -36,9 +36,9 @@ setTimeout(() => {
   capturer.save((blob) => {
     blobUtil.blobToBase64String(blob).then(function (base64String) {
       // success
-      var vid = document.createElement("video");
+      var vid = document.createElement("gif");
       vid.setAttribute("src", URL.createObjectURL(blob));
-      vid.setAttribute("type", "video/webm");
+      vid.setAttribute("type", "image/gif");
       vid.setAttribute("id", "test");
       vid.innerText = base64String;
       document.body.appendChild(vid);

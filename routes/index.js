@@ -6,6 +6,7 @@ var puppeteer = require('puppeteer');
 //TODO: better file storage/organization.
 var testAnimFile = "animations/testanim.webm";
 var testStillFile = "animations/teststill.png";
+var uhohFile = "animations/uhoh.gif";
 var clockFileBase = "animations/clock";
 
 async function recordFile(url, filename) {
@@ -45,7 +46,7 @@ router.get('/testanim', async function(req, res, next) {
     } else {
         buffer = await recordTestAnimation(req.headers.host, testAnimFile);
     }
-	res.set('Content-Type', 'video/webm');
+	res.set('Content-Type', 'image/gif');
     res.send(buffer);
 });
 
@@ -56,24 +57,23 @@ router.get('/teststill', async function(req, res, next) {
     } else {
         buffer = await recordTestStill(req.headers.host, testStillFile);
     }
-    res.set('Content-Type', 'img/png');
+    res.set('Content-Type', 'image/png');
     res.send(buffer);
 });
 
 router.get('/clock', async function(req, res, next) {
     var buffer;
     var m = req.query.m;
-    var clockFile = clockFileBase + '_' + m + '.webm';
+    var clockFile = clockFileBase + '_' + m + '.gif';
     if(!m) {
-        //TODO: better error video
-        buffer = fs.readFileSync(testAnimFile);
+        buffer = fs.readFileSync(uhohFile);
     }
     else if(fs.existsSync(clockFile)) {
         buffer = fs.readFileSync(clockFile);
     } else {
         buffer = await recordClock(req.headers.host, clockFile, 'm=' + m);
     }
-    res.set('Content-Type', 'video/webm');
+    res.set('Content-Type', 'image/gif');
     res.send(buffer);
 });
 
