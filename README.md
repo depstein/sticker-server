@@ -1,6 +1,8 @@
 # sticker-server
 Server-side sticker recorder.
 
+(Tomcat configuration may not be necessary)
+
 ## Set Up Tomcat
 - Please carefully read the following instructions and set up tomcat in your instance
   - https://grape.ics.uci.edu/wiki/public/wiki/cs122b-2018-spring-project1-install-tomcat-on-aws

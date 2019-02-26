@@ -7,10 +7,7 @@ var puppeteer = require('puppeteer');
 var testAnimFile = "animations/testanim.webm";
 var testStillFile = "animations/teststill.png";
 var uhohFile = "animations/uhoh.gif";
-var clockFileBase = "../animations/clock";
-
-// Tomcat Port
-let portT = 8080
+var clockFileBase = "animations/clock";
 
 async function recordFile(url, filename) {
     const browser = await puppeteer.launch();
@@ -35,7 +32,7 @@ async function recordTestStill (server, filename) {
 };
 
 async function recordClock (server, filename, getParams) {
-    return await recordFile('http://'+server+'/sticker-server/animations/clock.html?'+ getParams, filename);
+    return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
 };
 
 router.get('*', function(req, res, next) {
@@ -47,7 +44,7 @@ router.get('/testanim', async function(req, res, next) {
     if(fs.existsSync(testAnimFile)) {
         buffer = fs.readFileSync(testAnimFile);
     } else {
-        buffer = await recordTestAnimation(req.headers.host.split(":")[0]+':'+portT, testAnimFile);
+        buffer = await recordTestAnimation(req.headers.host, testAnimFile);
     }
 	res.set('Content-Type', 'image/gif');
     res.send(buffer);
@@ -58,7 +55,7 @@ router.get('/teststill', async function(req, res, next) {
     if(fs.existsSync(testStillFile)) {
         buffer = fs.readFileSync(testStillFile);
     } else {
-        buffer = await recordTestStill(req.headers.host.split(":")[0]+':'+portT, testStillFile);
+        buffer = await recordTestStill(req.headers.host, testStillFile);
     }
     res.set('Content-Type', 'image/png');
     res.send(buffer);
@@ -74,7 +71,7 @@ router.get('/clock', async function(req, res, next) {
     else if(fs.existsSync(clockFile)) {
         buffer = fs.readFileSync(clockFile);
     } else {
-        buffer = await recordClock(req.headers.host.split(":")[0]+':'+portT, clockFile, 'm=' + m);
+        buffer = await recordClock(req.headers.host, clockFile, 'm=' + m);
     }
     res.set('Content-Type', 'image/gif');
     res.send(buffer);
