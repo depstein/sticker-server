@@ -1,27 +1,28 @@
-# sticker-server
+# Sticker-Server
 Server-side sticker recorder.
 
-(Tomcat configuration may not be necessary)
+## Set-Up
+### Install Project Dependencies
+- Before git clone this repository, please make sure all dependencies for **puppeteer** are already installed in your instance.
+  - For more details please review the list on the top of the page, https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
+- After cloning this repository into your instance, please navigate into root folder of the server, **/sticker-server**, then run the command.
+  - **npm install**
+### Install forever
+- Install **forever** if you want to keep running the server after exiting the instance
+  - **sudo npm install forever -g**
 
-## Set Up Tomcat
-- Please carefully read the following instructions and set up tomcat in your instance
-  - https://grape.ics.uci.edu/wiki/public/wiki/cs122b-2018-spring-project1-install-tomcat-on-aws
+## Usage
+### Run Temporarily
+- Please navigate to root folder of the server, **/sticker-server**, then run the command.
+  - **npm start**  
+### Run Forever
+- Run the Server Forever, Please Run the Command.
+  - **forever start --minUptime 1000 --spinSleepTime 1000 ./bin/www**
+### Stop Forever 
+- Stop the Server from Running Forever, Please Run the Command.
+  - **forever stop ./bin/www**
 
-## Set Up Sticker Server
-- After successfully setting up tomcat in your instance, please change the current directory into **/webapps** inside **/tomcat**
-- Then git clone this repository inside **/webapps** folder
-- Chang your directory into **/sticker-server** 
-- Please check out https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
-    - To see if all dependencies for puppeteer is installed, which are listed on the top of the page
-    - If not, please install all dependencies for puppeteer first
-- Then run **npm install** inside **/sticker-sever** to install all required node modules.
-- Then go into **/bin** folder inside **/sticker-server**, **chmod +x www** to make script **www** executable
-
-## Run the Sticker Server with Tomcat
-- (**Must**)Change your directory into **/bin** folder inside **/sticker-server**
-- Run script **./www**
-  - test functionality by sending request to **http://(IP address of your instance):(port used by sticker server)/clock?m=10** on your local machine's browser
-
-## Run the Sticker Server Background Without Ternimation After exiting the Instance
-- Use **nohup ./www &** to start the server
-- Use **kill $(ps aux | grep node | grep www | awk '{print $2}')** to kill the process
+## Testing
+### Clock Sticker
+  - Please Navigate to the Following URL.
+    - http://ipAddressOfYourInstance:5000/clock?m=10
