@@ -32,7 +32,8 @@ async function recordTestStill (server, filename) {
 };
 
 async function recordClock (server, filename, getParams) {
-    return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
+    //return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
+    return await recordFile('http://'+server+'/d_clock.html?'+ getParams, filename);
 };
 
 router.get('*', function(req, res, next) {
