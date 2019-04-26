@@ -1,7 +1,6 @@
 .DS_Store
 node_modules/
 *.webm
-*.png
 *.gif
 !uhoh.gif
 !uhoh.png
