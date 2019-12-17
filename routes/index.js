@@ -44,11 +44,11 @@ router.get('/', async function(req, res, next) {
     res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres a still!" property="og:title">\n<meta content="/teststill.png" property="snapchat:sticker" />');
 });
 
-router.get('/testanim', async function(req, res, next) {
+router.get('/testanim_meta', async function(req, res, next) {
     res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres an animation!" property="og:title">\n<meta content="/testanim.gif" property="snapchat:sticker" />');
 });
 
-router.get('/clock', async function(req, res, next) {
+router.get('/clock_meta', async function(req, res, next) {
     res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres a clock!" property="og:title">\n<meta content="/clock?m=50" property="snapchat:sticker" />');
 });
 
