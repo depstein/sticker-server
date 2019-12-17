@@ -41,7 +41,7 @@ router.get('*', function(req, res, next) {
 });
 
 router.get('/', async function(req, res, next) {
-    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Hiya there!" property="og:title">\n<meta content="/teststill" property="snapchat:sticker" />');
+    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Hiya there!" property="og:title">\n<meta content="/teststill.png" property="snapchat:sticker" />');
 });
 
 router.get('/testanim', async function(req, res, next) {
@@ -55,7 +55,7 @@ router.get('/testanim', async function(req, res, next) {
     res.send(buffer);
 });
 
-router.get('/teststill', async function(req, res, next) {
+router.get('/teststill.png', async function(req, res, next) {
     var buffer;
     if(fs.existsSync(testStillFile)) {
         buffer = fs.readFileSync(testStillFile);
