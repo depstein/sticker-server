@@ -10,7 +10,7 @@ var uhohFile = "animations/uhoh.gif";
 var clockFileBase = "animations/clock";
 
 async function recordFile(url, filename) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
     const page = await browser.newPage();
     await page.goto(url, {waitUntil: 'networkidle2'});
 
