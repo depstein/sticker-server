@@ -40,6 +40,10 @@ router.get('*', function(req, res, next) {
 	next();
 });
 
+router.get('/', async function(req, res, next) {
+    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Hiya there!" property="og:title">\n<meta content="/assets/images/model_giant.png" property="snapchat:sticker" />');
+});
+
 router.get('/testanim', async function(req, res, next) {
     var buffer;
     if(fs.existsSync(testAnimFile)) {
