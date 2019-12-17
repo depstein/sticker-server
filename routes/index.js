@@ -4,7 +4,7 @@ var fs = require('fs');
 var puppeteer = require('puppeteer');
 
 //TODO: better file storage/organization.
-var testAnimFile = "animations/testanim.webm";
+var testAnimFile = "animations/testanim.gif";
 var testStillFile = "animations/teststill.png";
 var uhohFile = "animations/uhoh.gif";
 var clockFileBase = "animations/clock";
@@ -41,15 +41,15 @@ router.get('*', function(req, res, next) {
 });
 
 router.get('/', async function(req, res, next) {
-    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Hiya there!" property="og:title">\n<meta content="/teststill.png" property="snapchat:sticker" />');
+    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres a still!" property="og:title">\n<meta content="/teststill.png" property="snapchat:sticker" />');
 });
 
-router.get('/2', async function(req, res, next) {
-    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Hiya there!" property="og:title">\n<meta content="/testanim.gif" property="snapchat:sticker" />');
+router.get('/testanim', async function(req, res, next) {
+    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres an animation!" property="og:title">\n<meta content="/testanim.gif" property="snapchat:sticker" />');
 });
 
-router.get('/3', async function(req, res, next) {
-    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Hiya there!" property="og:title">\n<meta content="/clock?m=50" property="snapchat:sticker" />');
+router.get('/clock', async function(req, res, next) {
+    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres a clock!" property="og:title">\n<meta content="/clock?m=50" property="snapchat:sticker" />');
 });
 
 router.get('/testanim.gif', async function(req, res, next) {
