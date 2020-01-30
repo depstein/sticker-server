@@ -49,7 +49,7 @@ router.get('/testanim_meta', async function(req, res, next) {
 });
 
 router.get('/clock_meta', async function(req, res, next) {
-    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres a clock!" property="og:title">\n<meta content="/clock?m=50" property="snapchat:sticker" />');
+    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres a clock!" property="og:title">\n<meta content="/clock/50.gif" property="snapchat:sticker" />');
 });
 
 router.get('/testanim.gif', async function(req, res, next) {
@@ -74,9 +74,9 @@ router.get('/teststill.png', async function(req, res, next) {
     res.send(buffer);
 });
 
-router.get('/clock', async function(req, res, next) {
+router.get('/clock/:duration.gif', async function(req, res, next) {
     var buffer;
-    var m = req.query.m;
+    var m = req.params.duration;
     var clockFile = clockFileBase + '_' + m + '.gif';
     if(!m) {
         buffer = fs.readFileSync(uhohFile);
