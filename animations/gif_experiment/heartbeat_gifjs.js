@@ -15,7 +15,7 @@ document.getElementById("animation_stage").innerHTML =
       <ellipse cx="147.55" cy="67.82" fill="#f1f1f1" rx="6.68" ry="14.35" transform="matrix(.56049446 -.82815817 .82815817 .56049446 8.68 152)" />
       <text id="beats_field" font-family="JandaManateeSolid, Janda Manatee Solid" font-size="22.13" stroke="#fff" stroke-miterlimit="10" transform="matrix(.98852027 -.15108829 .15108829 .98852027 60.63 112.43)">
           ` +
-  new URL(window.location.href).searchParams.get("beats") +
+    new URL(window.location.href).searchParams.get("beats") +
   ` beats
           <tspan font-size="17.54">
               <tspan x="6.19" y="18.38">per</tspan>
@@ -76,24 +76,30 @@ function processImage() {
   v = canvg.Canvg.fromString(ctx, xml, {offsetX: 50, offsetY: 0});
   v.start();
   
-    gif.addFrame(img, { delay: 100 });
   img.src = canvas.toDataURL("image/png");
+  renderedFrames.push(img.src);
+ 
+  gif.addFrame(img, { delay: 100 });
+  
 
   if (current <= frames) {
     processImage();
   } else {
     gsap_animation.play(0);
+    console.log("animation processed");
   }
 }
 
 gif.on("finished", function(blob) {
   console.log(URL.createObjectURL(blob));
-  var animatedImage = document.createElement("img");
-  animatedImage.src = URL.createObjectURL(blob);
-  animatedImage.id = "gifExport";
-  document.body.appendChild(animatedImage);
-  var newTab = window.open(URL.createObjectURL(blob), '_blank')
-  newTab.focus()
+  blobUtil.blobToBase64String(blob).then(function (base64String) {
+    var animatedImage = document.createElement("img");
+    animatedImage.src = URL.createObjectURL(blob);
+    animatedImage.setAttribute("type", "image/gif");
+    animatedImage.setAttribute("id", "test");
+    animatedImage.innerText = base64String;
+    document.body.appendChild(animatedImage);
+  })
 });
 
 gif.render();
