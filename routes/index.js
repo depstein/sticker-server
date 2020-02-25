@@ -8,7 +8,7 @@ var testAnimFile = "animations/testanim.gif";
 var testStillFile = "animations/teststill.png";
 var uhohFile = "animations/uhoh.gif";
 var clockFileBase = "animations/clock";
-var heartbeatFileBase = "animations/heartbeat";
+var heartbeatFileBase = "animations/heartbeat/cache/heartbeat";
 
 async function recordFile(url, filename) {
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
@@ -39,7 +39,8 @@ async function recordClock (server, filename, getParams) {
 
 async function recordHeartbeat (server, filename, getParams) {
     //return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
-    return await recordFile('http://'+server+'/heartbeat.html?'+ getParams, filename);
+    console.log(getParams);
+    return await recordFile('http://'+server+'/heartbeat/heartbeat_render.html?'+ getParams, filename);
 };
 
 
@@ -97,17 +98,20 @@ router.get('/clock', async function(req, res, next) {
     res.send(buffer);
 });
 
-router.get('/heartbeat', async function(req, res, next) {
+router.get('/heartbeat/:option/:beats', async function(req, res, next) {
     var buffer;
-    var beats = req.query.beats;
-    var heartbeatFile = heartbeatFileBase + '_' + beats + '.gif';
+    var beats = req.params.beats;
+    var option = req.params.option;
+    console.log(beats);
+    console.log(option);
+    var heartbeatFile = heartbeatFileBase + '_' + option + '_' + beats + '.gif';
     if(!beats) {
         buffer = fs.readFileSync(uhohFile);
     }
     else if(fs.existsSync(heartbeatFile)) {
         buffer = fs.readFileSync(heartbeatFile);
     } else {
-        buffer = await recordHeartbeat(req.headers.host, heartbeatFile, 'beats=' + beats);
+        buffer = await recordHeartbeat(req.headers.host, heartbeatFile, 'option=' + option + '&beats=' + beats);
     }
     res.set('Content-Type', 'image/gif');
     res.send(buffer);

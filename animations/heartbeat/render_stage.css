@@ -1,0 +1,34 @@
+body {
+    padding: 15px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  svg {
+    outline: 1px solid red;
+  }
+
+  section {
+    padding-top: 10px;
+  }
+
+  img {
+    border: 1px solid #ddd;
+    width: 100px;
+    height: auto;
+    margin: 0 10px 5px 0;
+  }
+
+  #gifExport {
+    width: 300px;
+  }
+
+  #animation_stage {
+    transform: scale(0.5);
+  }
+
+  canvas {
+    display: none;
+  }
