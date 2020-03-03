@@ -98,20 +98,21 @@ router.get('/clock', async function(req, res, next) {
     res.send(buffer);
 });
 
-router.get('/heartbeat/:option/:beats', async function(req, res, next) {
+router.get('/heartbeat/:option/:beats/:type/:goal', async function(req, res, next) {
     var buffer;
     var beats = req.params.beats;
     var option = req.params.option;
-    console.log(beats);
-    console.log(option);
-    var heartbeatFile = heartbeatFileBase + '_' + option + '_' + beats + '.gif';
+    var type = req.params.type;
+    var goal = req.params.goal;
+
+    var heartbeatFile = heartbeatFileBase + '_' + option + '_' + beats + '_' + type + '_' + goal + '.gif';
     if(!beats) {
         buffer = fs.readFileSync(uhohFile);
     }
     else if(fs.existsSync(heartbeatFile)) {
         buffer = fs.readFileSync(heartbeatFile);
     } else {
-        buffer = await recordHeartbeat(req.headers.host, heartbeatFile, 'option=' + option + '&beats=' + beats);
+        buffer = await recordHeartbeat(req.headers.host, heartbeatFile, 'option=' + option + '&beats=' + beats + '&type=' + type + '&goal=' + goal);
     }
     res.set('Content-Type', 'image/gif');
     res.send(buffer);

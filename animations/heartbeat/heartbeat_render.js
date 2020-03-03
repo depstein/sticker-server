@@ -1,36 +1,50 @@
-// Inject the animation into div to dynamically generate parameter
 document.getElementById("animation_stage").innerHTML = 
 heartbeat_svg(new URL(window.location.href).searchParams.get("option"), 
-new URL(window.location.href).searchParams.get("beats"));
+new URL(window.location.href).searchParams.get("beats"), new URL(window.location.href).searchParams.get("goal"));
 
-// Init Gif.js object
-var gif = new GIF({
-  width: 1000,
-  height: 1000,
-  workers: 1,
-  quality: 20,
-  transparent: "rgba(0,0,0,0)",
-  debug: true
-});
+var svg_element = document.getElementById("heart")
 
-// GSAP Animation on sticker svg
-var speed = 0.1; //seconds
-var heart = document.getElementById("heart");
+var repeatGif = 0;
+var renderedFrames = [];
 
-var gsap_animation = TweenMax.to(heart, 1, {
-  scaleX: 1.2,
-  scaleY: 1.3,
-  ease: Elastic.easeOut,
-  repeatDelay: speed
-});
+if(new URL(window.location.href).searchParams.get("option") == "chartjunk-domain-relevant-1"){
+  var gsap_animation = chartjunk_animation_options(svg_element, (new URL(window.location.href).searchParams.get("beats") / new URL(window.location.href).searchParams.get("goal") * 100));
+  repeatGif = -1;
+}
+else {
+  var gsap_animation = animation_options(svg_element, new URL(window.location.href).searchParams.get("type"))
+}
 
+function renderGif() {
+  // Init Gif.js object
+  var gif = new GIF({
+    width: 1000,
+    height: 1000,
+    workers: 6,
+    quality: 20,
+    transparent: "rgba(0,0,0,0)",
+    debug: true,
+    repeat: repeatGif
+  });
 
-processImage().then((frames) => {gsap_animation.play(0);
-  for(var i in frames) {
-    gif.addFrame(frames[i], {delay: 100});
+  for(var i in renderedFrames) {
+    gif.addFrame(renderedFrames[i], {delay: 100});
   }
   gif.render();
-});
+
+  gif.on("finished", function(blob) {
+    console.log(URL.createObjectURL(blob));
+    blobUtil.blobToBase64String(blob).then(function(base64String) {
+      var animatedImage = document.createElement("img");
+      animatedImage.src = URL.createObjectURL(blob);
+      animatedImage.setAttribute("type", "image/gif");
+      animatedImage.setAttribute("id", "test");
+      animatedImage.innerText = base64String;
+      document.body.appendChild(animatedImage);
+    });
+  });
+  
+}
 
 async function processImage() {
   var svg = document.querySelector("svg");
@@ -40,8 +54,7 @@ async function processImage() {
   var duration = gsap_animation.duration();
   var frames = Math.ceil((duration / 1) * fps);
   var current = 0;
-
-  var renderedFrames = [];
+  var framesLoaded = 0;
 
   while(current <= frames) {
     gsap_animation.progress(current++ / frames);
@@ -52,25 +65,16 @@ async function processImage() {
     img.crossOrigin = "Anonymous";
   
     img.onload = function() {
-      console.log("load");
       list.appendChild(this);
+      framesLoaded++;
+      if(framesLoaded === frames){
+        renderGif();
+      }
     };
   
     img.src = URL.createObjectURL(blob);
     renderedFrames.push(img);
   }
-  return renderedFrames;
 }
 
-gif.on("finished", function(blob) {
-  console.log(URL.createObjectURL(blob));
-  blobUtil.blobToBase64String(blob).then(function(base64String) {
-    var animatedImage = document.createElement("img");
-    animatedImage.src = URL.createObjectURL(blob);
-    animatedImage.setAttribute("type", "image/gif");
-    animatedImage.setAttribute("id", "test");
-    animatedImage.innerText = base64String;
-    document.body.appendChild(animatedImage);
-  });
-});
-
+processImage().then(gsap_animation.play(0));
