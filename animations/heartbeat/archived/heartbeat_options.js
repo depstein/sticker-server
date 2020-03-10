@@ -41,7 +41,7 @@ function heartbeat_svg(options, param, goal) {
                 <line class="cls-7" x1="108.09" y1="155.92" x2="108.09" y2="163.84" />
                 <line class="cls-7" x1="172.6" y1="85.26" x2="172.6" y2="108.49" />
             </g>
-            <text class="cls-13" transform="translate(63.43 106.27) rotate(-8.69)">
+            <text id="test-id" class="cls-13" transform="translate(63.43 106.27) rotate(-8.69)">
                 ` + param + `
                 beats
                 <tspan class="cls-15">

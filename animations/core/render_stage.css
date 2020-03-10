@@ -1,5 +1,6 @@
 body {
     padding: 15px;
+    background-color: #474747;
   }
 
   * {
@@ -21,14 +22,10 @@ body {
     margin: 0 10px 5px 0;
   }
 
-  #gifExport {
-    width: 300px;
+  svg {
+    width: 500px;
   }
 
-  #animation_stage {
-    transform: scale(0.5);
-  }
-
-  canvas {
-    display: none;
+  #test {
+    width: 500px;
   }
