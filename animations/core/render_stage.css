@@ -1,0 +1,31 @@
+body {
+    padding: 15px;
+    background-color: #474747;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  svg {
+    outline: 1px solid red;
+  }
+
+  section {
+    padding-top: 10px;
+  }
+
+  img {
+    border: 1px solid #ddd;
+    width: 100px;
+    height: auto;
+    margin: 0 10px 5px 0;
+  }
+
+  svg {
+    width: 500px;
+  }
+
+  #test {
+    width: 500px;
+  }

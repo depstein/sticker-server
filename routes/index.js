@@ -8,6 +8,7 @@ var testAnimFile = "animations/testanim.gif";
 var testStillFile = "animations/teststill.png";
 var uhohFile = "animations/uhoh.gif";
 var clockFileBase = "animations/clock";
+var heartbeatFileBase = "animations/heartbeat/cache/heartbeat";
 
 async function recordFile(url, filename) {
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
@@ -35,6 +36,13 @@ async function recordClock (server, filename, getParams) {
     //return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
     return await recordFile('http://'+server+'/d_clock.html?'+ getParams, filename);
 };
+
+async function recordHeartbeat (server, filename, getParams) {
+    //return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
+    console.log(getParams);
+    return await recordFile('http://'+server+'/heartbeat/heartbeat_render.html?'+ getParams, filename);
+};
+
 
 router.get('*', function(req, res, next) {
 	next();
@@ -85,6 +93,26 @@ router.get('/clock/:duration.gif', async function(req, res, next) {
         buffer = fs.readFileSync(clockFile);
     } else {
         buffer = await recordClock(req.headers.host, clockFile, 'm=' + m);
+    }
+    res.set('Content-Type', 'image/gif');
+    res.send(buffer);
+});
+
+router.get('/heartbeat/:option/:beats/:type/:goal', async function(req, res, next) {
+    var buffer;
+    var beats = req.params.beats;
+    var option = req.params.option;
+    var type = req.params.type;
+    var goal = req.params.goal;
+
+    var heartbeatFile = heartbeatFileBase + '_' + option + '_' + beats + '_' + type + '_' + goal + '.gif';
+    if(!beats) {
+        buffer = fs.readFileSync(uhohFile);
+    }
+    else if(fs.existsSync(heartbeatFile)) {
+        buffer = fs.readFileSync(heartbeatFile);
+    } else {
+        buffer = await recordHeartbeat(req.headers.host, heartbeatFile, 'option=' + option + '&beats=' + beats + '&type=' + type + '&goal=' + goal);
     }
     res.set('Content-Type', 'image/gif');
     res.send(buffer);
