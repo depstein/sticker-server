@@ -4,6 +4,7 @@ node_modules/
 *.gif
 !uhoh.gif
 !uhoh.png
+.yarn.lock
 
 # Ignore sticker cache commits
 animations/heartbeat/cache
