@@ -1,3 +1,4 @@
+
 // Getting the svg element from the html page to be animated
 var svg = document.querySelector("svg");
 
@@ -98,3 +99,4 @@ function renderGif() {
 // Runner function call for the whole process
 // Process: [Getting svg, setting logic using query param] -> [Extract frames from GSAP animation] -> [Render Gif via Gif.js]
 processAnimationFrames().then(gsap_animation.play());
+

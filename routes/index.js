@@ -4,11 +4,8 @@ var fs = require('fs');
 var puppeteer = require('puppeteer');
 
 //TODO: better file storage/organization.
-var testAnimFile = "animations/testanim.gif";
-var testStillFile = "animations/teststill.png";
 var uhohFile = "animations/uhoh.gif";
-var clockFileBase = "animations/clock";
-var heartbeatFileBase = "animations/heartbeat/cache/heartbeat";
+var heartbeatFileBase = "animations/heartbeat";
 
 async function recordFile(url, filename) {
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
@@ -24,23 +21,11 @@ async function recordFile(url, filename) {
     return file;
 }
 
-async function recordTestAnimation (server, filename) {
-    return await recordFile('http://' + server + '/testanim.html', filename);
-};
-
-async function recordTestStill (server, filename) {
-    return await recordFile('http://' + server + '/teststill.html', filename);
-};
-
-async function recordClock (server, filename, getParams) {
-    //return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
-    return await recordFile('http://'+server+'/d_clock.html?'+ getParams, filename);
-};
 
 async function recordHeartbeat (server, filename, getParams) {
     //return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
     console.log(getParams);
-    return await recordFile('http://'+server+'/heartbeat/heartbeat_render.html?'+ getParams, filename);
+    return await recordFile('http://'+server+'/heartbeat/plain-domain-relevant-1.html?'+ getParams, filename);
 };
 
 
@@ -48,71 +33,21 @@ router.get('*', function(req, res, next) {
 	next();
 });
 
-router.get('/', async function(req, res, next) {
-    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres a still!" property="og:title">\n<meta content="/teststill.png" property="snapchat:sticker" />');
-});
-
-router.get('/testanim_meta', async function(req, res, next) {
-    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres an animation!" property="og:title">\n<meta content="/testanim.gif" property="snapchat:sticker" />');
-});
-
-router.get('/clock_meta', async function(req, res, next) {
-    res.send('<meta content="Hello Snapchat" property="og:site_name">\n<meta content="Heres a clock!" property="og:title">\n<meta content="/clock/50.gif" property="snapchat:sticker" />');
-});
-
-router.get('/testanim.gif', async function(req, res, next) {
+router.get('/heartbeat', async function(req, res, next) {
     var buffer;
-    if(fs.existsSync(testAnimFile)) {
-        buffer = fs.readFileSync(testAnimFile);
-    } else {
-        buffer = await recordTestAnimation(req.headers.host, testAnimFile);
-    }
-	res.set('Content-Type', 'image/gif');
-    res.send(buffer);
-});
+    var value = req.query.value;
+    var option = req.query.option;
+    var type = req.query.type;
+    var goal = req.query.goal;
 
-router.get('/teststill.png', async function(req, res, next) {
-    var buffer;
-    if(fs.existsSync(testStillFile)) {
-        buffer = fs.readFileSync(testStillFile);
-    } else {
-        buffer = await recordTestStill(req.headers.host, testStillFile);
-    }
-    res.set('Content-Type', 'image/png');
-    res.send(buffer);
-});
-
-router.get('/clock/:duration.gif', async function(req, res, next) {
-    var buffer;
-    var m = req.params.duration;
-    var clockFile = clockFileBase + '_' + m + '.gif';
-    if(!m) {
-        buffer = fs.readFileSync(uhohFile);
-    }
-    else if(fs.existsSync(clockFile)) {
-        buffer = fs.readFileSync(clockFile);
-    } else {
-        buffer = await recordClock(req.headers.host, clockFile, 'm=' + m);
-    }
-    res.set('Content-Type', 'image/gif');
-    res.send(buffer);
-});
-
-router.get('/heartbeat/:option/:beats/:type/:goal', async function(req, res, next) {
-    var buffer;
-    var beats = req.params.beats;
-    var option = req.params.option;
-    var type = req.params.type;
-    var goal = req.params.goal;
-
-    var heartbeatFile = heartbeatFileBase + '_' + option + '_' + beats + '_' + type + '_' + goal + '.gif';
-    if(!beats) {
+    var heartbeatFile = heartbeatFileBase + '_' + option + '_' + value + '_' + type + '_' + goal + '.gif';
+    if(!value) {
         buffer = fs.readFileSync(uhohFile);
     }
     else if(fs.existsSync(heartbeatFile)) {
         buffer = fs.readFileSync(heartbeatFile);
     } else {
-        buffer = await recordHeartbeat(req.headers.host, heartbeatFile, 'option=' + option + '&beats=' + beats + '&type=' + type + '&goal=' + goal);
+        buffer = await recordHeartbeat(req.headers.host, heartbeatFile, 'animation=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
     }
     res.set('Content-Type', 'image/gif');
     res.send(buffer);
