@@ -29,3 +29,9 @@ body {
   #test {
     width: 500px;
   }
+
+            
+  @font-face {
+    font-family: "JandaManateeSolid"; 
+    src: url(../font/JandaManateeSolid.ttf);
+  }

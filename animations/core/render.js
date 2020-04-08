@@ -1,18 +1,17 @@
-
 // Getting the svg element from the html page to be animated
 var svg = document.querySelector("svg");
 
-var animation = new URL(window.location.href).searchParams.get("animation");
+var option = new URL(window.location.href).searchParams.get("option");
 var value = new URL(window.location.href).searchParams.get("value");
 
 // Select type of animation based on the value of the "animation" query parameter
 // options = [pulse, shake, count]
-var gsap_animation = animation_options(svg, animation, value);
+var gsap_animation = animation_options(svg, option, value);
 
-if(animation === "count") {
+if(option === "count") {
     var repeat_mode = -1;
 }
-else if(animation === "pulse" || animation === "shake") {
+else if(option === "pulse" || option === "shake") {
     var repeat_mode = 0;
 }
 
