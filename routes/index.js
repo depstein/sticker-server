@@ -6,6 +6,7 @@ var puppeteer = require('puppeteer');
 //TODO: better file storage/organization.
 var uhohFile = "animations/uhoh.gif";
 var heartbeatFileBase = "animations/heartbeat/cache/heartbeat";
+var stepsFileBase = "animations/steps/cache/steps";
 
 async function recordFile(url, filename) {
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
@@ -22,8 +23,9 @@ async function recordFile(url, filename) {
 }
 
 
-async function recordHeartbeat (server, filename, getParams) {
-    return await recordFile('http://'+server+'/heartbeat/plain-domain-relevant-1.html?'+ getParams, filename);
+async function recordSticker (server, catagory, filename, type, getParams) {
+    //return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
+    return await recordFile('http://'+ server + '/' + catagory + '/' + type + '.html?'+ getParams, filename);
 };
 
 
@@ -45,7 +47,27 @@ router.get('/heartbeat', async function(req, res, next) {
     else if(fs.existsSync(heartbeatFile)) {
         buffer = fs.readFileSync(heartbeatFile);
     } else {
-        buffer = await recordHeartbeat(req.headers.host, heartbeatFile, 'animation=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
+        buffer = await recordSticker(req.headers.host, 'heartbeat', heartbeatFile, type, 'option=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
+    }
+    res.set('Content-Type', 'image/gif');
+    res.send(buffer);
+});
+
+router.get('/steps', async function(req, res, next) {
+    var buffer;
+    var value = req.query.value;
+    var option = req.query.option;
+    var type = req.query.type;
+    var goal = req.query.goal;
+
+    var stepsFile = stepsFileBase + '_' + option + '_' + value + '_' + type + '_' + goal + '.gif';
+    if(!value) {
+        buffer = fs.readFileSync(uhohFile);
+    }
+    else if(fs.existsSync(stepsFile)) {
+        buffer = fs.readFileSync(stepsFile);
+    } else {
+        buffer = await recordSticker(req.headers.host, 'steps', stepsFile, type, 'option=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
     }
     res.set('Content-Type', 'image/gif');
     res.send(buffer);

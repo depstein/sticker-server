@@ -22,7 +22,44 @@ Server-side sticker recorder.
 - Stop the Server from Running Forever, Please Run the Command.
   - **forever stop ./bin/www**
 
-## Testing
-### Clock Sticker
-  - Please Navigate to the Following URL.
-    - http://ipAddressOfYourInstance:5000/clock?m=10
+
+# Stickers Wiki
+<b>API Endpoint:</b> http://sheltered-waters-08469.herokuapp.com/{sticker}/?value={number}&type={str}&option={str}&goal={number}
+## Heartbeat
+| | |
+|---|---|
+| <img style="width: 100px" src="stickers/heartbeat-plain-domain-relevant-1.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=121&type=plain-domain-relevant-1&option=shake) | 
+| type | plain-domain-relevant-1 |
+| value | <i>required</i> |
+| option | [count, shake, pulse] |
+
+| | |
+|---|---|
+| <img style="width: 100px" src="stickers/heartbeat-plain-domain-relevant-2.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=100&type=plain-domain-relevant-2&option=count) | 
+| type | plain-domain-relevant-2 |
+| value | <i>required</i> |
+| option | [count, shake, pulse] |
+
+| | |
+|---|---|
+| <img style="width: 100px" src="stickers/heartbeat-plain-domain-relevant-3.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=100&type=plain-domain-relevant-3&option=count) | 
+| type | plain-domain-relevant-3 |
+| value | <i>required</i> |
+| option | [count, shake, pulse] |
+
+<br/>
+
+## Steps
+| | |
+|---|---|
+| <img style="width: 100px" src="stickers/steps-plain-domain-relevant-1.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-relevant-1&option=shake) | 
+| type | plain-domain-relevant-1 |
+| value | <i>required</i> |
+| option | [count, shake, pulse] |
+
+| | |
+|---|---|
+| <img style="width: 100px" src="stickers/steps-plain-domain-relevant-2.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-relevant-2&option=count) | 
+| type | plain-domain-relevant-2 |
+| value | <i>required</i> |
+| option | [count, shake, pulse] |
