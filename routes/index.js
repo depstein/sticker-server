@@ -5,8 +5,8 @@ var puppeteer = require('puppeteer');
 
 //TODO: better file storage/organization.
 var uhohFile = "animations/uhoh.gif";
-var heartbeatFileBase = "animations/heartbeat/cache/heartbeat";
-var stepsFileBase = "animations/steps/cache/steps";
+var heartbeatFileBase = "animations/heartbeat";
+var stepsFileBase = "animations/steps";
 
 async function recordFile(url, filename) {
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
