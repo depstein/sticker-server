@@ -67,8 +67,8 @@ function renderGif() {
   var gif = new GIF({
     width: 1000,
     height: 1000,
-    workers: 6,
-    quality: 20,
+    workers: 10,
+    quality: 10,
     transparent: "rgba(0,0,0,0)",
     debug: true,
     repeat: repeat_mode

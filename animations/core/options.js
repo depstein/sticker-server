@@ -5,8 +5,8 @@ function animation_options(svg, param, value) {
     switch (param) {
       case "pulse":
         return TweenMax.to(svg, 0.8, {
-          scaleX: 1.2,
-          scaleY: 1.3,
+          scaleX: 1.05,
+          scaleY: 1.15,
           ease: Elastic.easeOut,
           repeatDelay: 0.1
         });

@@ -26,40 +26,71 @@ Server-side sticker recorder.
 # Stickers Wiki
 <b>API Endpoint:</b> http://sheltered-waters-08469.herokuapp.com/{sticker}/?value={number}&type={str}&option={str}&goal={number}
 ## Heartbeat
-| | |
-|---|---|
-| <img width= "100px" src="stickers/heartbeat-plain-domain-relevant-1.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=121&type=plain-domain-relevant-1&option=shake) | 
-| type | plain-domain-relevant-1 |
-| value | <i>required</i> |
-| option | [count, shake, pulse] |
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/heartbeat-plain-domain-relevant-1.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=121&type=plain-domain-relevant-1&option=shake) | | <img width= "100px" src="stickers/heartbeat-plain-domain-relevant-2.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=100&type=plain-domain-relevant-2&option=pulse) | 
+| type | plain-domain-relevant-1 | | type | plain-domain-relevant-2 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
 
-| | |
-|---|---|
-| <img width= "100px" src="stickers/heartbeat-plain-domain-relevant-2.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=100&type=plain-domain-relevant-2&option=count) | 
-| type | plain-domain-relevant-2 |
-| value | <i>required</i> |
-| option | [count, shake, pulse] |
 
-| | |
-|---|---|
-| <img width= "100px" src="stickers/heartbeat-plain-domain-relevant-3.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=100&type=plain-domain-relevant-3&option=count) | 
-| type | plain-domain-relevant-3 |
-| value | <i>required</i> |
-| option | [count, shake, pulse] |
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/heartbeat-plain-domain-relevant-3.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?value=100&type=plain-domain-relevant-3&option=shake) | | <img width= "100px" src="stickers/heartbeat-plain-domain-agnostic-1.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?type=plain-domain-agnostic-1&value=122&option=pulse) | 
+| type | plain-domain-relevant-3 | | type | plain-domain-agnostic-1 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
+
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/heartbeat-plain-domain-agnostic-2.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?type=plain-domain-agnostic-2&value=122&option=shake) | | <img width= "100px" src="stickers/heartbeat-plain-domain-agnostic-3.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/heartbeat/?type=plain-domain-agnostic-3&value=122&option=shake) | 
+| type | plain-domain-agnostic-2 | | type | plain-domain-agnostic-3 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
 
 <br/>
 
 ## Steps
-| | |
-|---|---|
-| <img width= "100px" src="stickers/steps-plain-domain-relevant-1.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-relevant-1&option=shake) | 
-| type | plain-domain-relevant-1 |
-| value | <i>required</i> |
-| option | [count, shake, pulse] |
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/steps-plain-domain-relevant-1.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-relevant-1&option=shake) | | <img width= "100px" src="stickers/steps-plain-domain-relevant-2.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-relevant-2&option=pulse) | 
+| type | plain-domain-relevant-1 | | type | plain-domain-relevant-2 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
 
-| | |
-|---|---|
-| <img width= "100px" src="stickers/steps-plain-domain-relevant-2.png"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-relevant-2&option=count) | 
-| type | plain-domain-relevant-2 |
-| value | <i>required</i> |
-| option | [count, shake, pulse] |
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/steps-plain-domain-relevant-3.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-relevant-3&option=shake) | | <img width= "100px" src="stickers/steps-plain-domain-agnostic-1.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-agnostic-1&option=shake) | 
+| type | plain-domain-relevant-3 | | type | plain-domain-agnostic-1 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
+
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/steps-plain-domain-agnostic-2.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-agnostic-2&option=pulse) | | <img width= "100px" src="stickers/steps-plain-domain-agnostic-3.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/steps/?value=1150&type=plain-domain-agnostic-3&option=pulse) | 
+| type | plain-domain-agnostic-2 | | type | plain-domain-agnostic-3 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
+
+## Food
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/food-plain-domain-relevant-1.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/food/?value=1150&type=plain-domain-relevant-1&option=shake) | | <img width= "100px" src="stickers/food-plain-domain-relevant-2.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/food/?value=1150&type=plain-domain-relevant-2&option=pulse) | 
+| type | plain-domain-relevant-1 | | type | plain-domain-relevant-2 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
+
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/food-plain-domain-relevant-3.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/food/?value=1150&type=plain-domain-relevant-3&option=shake) | | <img width= "100px" src="stickers/food-plain-domain-agnostic-1.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/food/?value=1150&type=plain-domain-agnostic-1&option=shake) | 
+| type | plain-domain-relevant-3 | | type | plain-domain-agnostic-1 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
+
+| | | | | |
+|---|---|---|---|---|
+| <img width= "100px" src="stickers/food-plain-domain-agnostic-2.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/food/?value=1150&type=plain-domain-agnostic-2&option=pulse) | | <img width= "100px" src="stickers/food-plain-domain-agnostic-3.gif"></img> | [<b>Sample</b>](http://sheltered-waters-08469.herokuapp.com/food/?value=1150&type=plain-domain-agnostic-3&option=pulse) | 
+| type | plain-domain-agnostic-2 | | type | plain-domain-agnostic-3 |
+| value | <i>required</i> | | value | <i>required</i> |
+| option | [count, shake, pulse] | | option | [count, shake, pulse] |
+

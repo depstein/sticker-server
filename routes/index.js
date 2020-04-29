@@ -7,6 +7,7 @@ var puppeteer = require('puppeteer');
 var uhohFile = "animations/uhoh.gif";
 var heartbeatFileBase = "animations/heartbeat";
 var stepsFileBase = "animations/steps";
+var foodFileBase = "animations/food";
 
 async function recordFile(url, filename) {
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
@@ -68,6 +69,26 @@ router.get('/steps', async function(req, res, next) {
         buffer = fs.readFileSync(stepsFile);
     } else {
         buffer = await recordSticker(req.headers.host, 'steps', stepsFile, type, 'option=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
+    }
+    res.set('Content-Type', 'image/gif');
+    res.send(buffer);
+});
+
+router.get('/food', async function(req, res, next) {
+    var buffer;
+    var value = req.query.value;
+    var option = req.query.option;
+    var type = req.query.type;
+    var goal = req.query.goal;
+
+    var foodFile = foodFileBase + '_' + option + '_' + value + '_' + type + '_' + goal + '.gif';
+    if(!value) {
+        buffer = fs.readFileSync(uhohFile);
+    }
+    else if(fs.existsSync(foodFile)) {
+        buffer = fs.readFileSync(foodFile);
+    } else {
+        buffer = await recordSticker(req.headers.host, 'food', foodFile, type, 'option=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
     }
     res.set('Content-Type', 'image/gif');
     res.send(buffer);
