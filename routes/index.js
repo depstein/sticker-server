@@ -5,9 +5,12 @@ var puppeteer = require('puppeteer');
 
 //TODO: better file storage/organization.
 var uhohFile = "animations/uhoh.gif";
-var heartbeatFileBase = "animations/heartbeat";
-var stepsFileBase = "animations/steps";
-var foodFileBase = "animations/food";
+
+var stickers = {
+    "heartbeat": "animations/heartbeat",
+    "steps": "animations/steps",
+    "food": "animations/food"
+}
 
 async function recordFile(url, filename) {
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
@@ -30,68 +33,52 @@ async function recordSticker (server, catagory, filename, type, getParams) {
 };
 
 
+async function processSticker(category, req, res) {
+    var buffer;
+    var value = req.query.value;
+    var option = req.query.option;
+    var type = req.query.type;
+    var goal = req.query.goal || 0;
+    var addi_value = req.query.addi_value || 0;
+    var unit = req.query.unit || 0;
+
+    var stickerFile = stickers[category] + '_' + option + '_' + value + '_' + type + '_' + goal + '_' + addi_value + '_' + unit + '.gif';
+
+    if(!value) {
+        buffer = fs.readFileSync(uhohFile);
+    }
+    else if(fs.existsSync(stickerFile)) {
+        buffer = fs.readFileSync(stickerFile);
+    } else {
+        buffer = await recordSticker(req.headers.host, category , stickerFile, type, 
+            'option=' + option + 
+            '&value=' + value + 
+            '&type=' + type + 
+            '&goal=' + goal +
+            '&addi_value=' + addi_value +
+            '&unit=' + unit );
+    }
+    res.set('Content-Type', 'image/gif');
+    res.send(buffer);
+
+}
+
+
 router.get('*', function(req, res, next) {
 	next();
 });
 
 router.get('/heartbeat', async function(req, res, next) {
-    var buffer;
-    var value = req.query.value;
-    var option = req.query.option;
-    var type = req.query.type;
-    var goal = req.query.goal;
-
-    var heartbeatFile = heartbeatFileBase + '_' + option + '_' + value + '_' + type + '_' + goal + '.gif';
-    if(!value) {
-        buffer = fs.readFileSync(uhohFile);
-    }
-    else if(fs.existsSync(heartbeatFile)) {
-        buffer = fs.readFileSync(heartbeatFile);
-    } else {
-        buffer = await recordSticker(req.headers.host, 'heartbeat', heartbeatFile, type, 'option=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
-    }
-    res.set('Content-Type', 'image/gif');
-    res.send(buffer);
+    processSticker('heartbeat', req, res)   
 });
 
 router.get('/steps', async function(req, res, next) {
-    var buffer;
-    var value = req.query.value;
-    var option = req.query.option;
-    var type = req.query.type;
-    var goal = req.query.goal;
-
-    var stepsFile = stepsFileBase + '_' + option + '_' + value + '_' + type + '_' + goal + '.gif';
-    if(!value) {
-        buffer = fs.readFileSync(uhohFile);
-    }
-    else if(fs.existsSync(stepsFile)) {
-        buffer = fs.readFileSync(stepsFile);
-    } else {
-        buffer = await recordSticker(req.headers.host, 'steps', stepsFile, type, 'option=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
-    }
-    res.set('Content-Type', 'image/gif');
-    res.send(buffer);
+    processSticker('steps', req, res)   
 });
 
 router.get('/food', async function(req, res, next) {
-    var buffer;
-    var value = req.query.value;
-    var option = req.query.option;
-    var type = req.query.type;
-    var goal = req.query.goal;
-
-    var foodFile = foodFileBase + '_' + option + '_' + value + '_' + type + '_' + goal + '.gif';
-    if(!value) {
-        buffer = fs.readFileSync(uhohFile);
-    }
-    else if(fs.existsSync(foodFile)) {
-        buffer = fs.readFileSync(foodFile);
-    } else {
-        buffer = await recordSticker(req.headers.host, 'food', foodFile, type, 'option=' + option + '&value=' + value + '&type=' + type + '&goal=' + goal);
-    }
-    res.set('Content-Type', 'image/gif');
-    res.send(buffer);
+    processSticker('food', req, res)
 });
+
 
 module.exports = router;
