@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../core/render_stage.css">
+		<script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js"></script>
+    <script src="../lib/gif.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js"></script>
+  </head>
+
+  <body>
+    <div id="time"></div>
+
+    <section></section>
+
+    <script>
+      var el = document.getElementById('time');
+      var value = parseInt(new URL(window.location.href).searchParams.get("value"));
+
+      var parseDuration = moment.duration(value);
+      console.log(parseDuration);
+      var orderOfDuration = ["years", "months", "days", "hours", "minutes", "seconds"];
+      var topTwoUnits = [];
+
+      if(new URL(window.location.href).searchParams.get("unit") === null){
+        for (i = 0; i < orderOfDuration.length; i++) {
+          if (parseDuration["_data"][orderOfDuration[i]] !== 0){
+            topTwoUnits.push([orderOfDuration[i], parseDuration["_data"][orderOfDuration[i]]])
+            if(topTwoUnits.length === 2) {
+              break;
+            }
+          }
+        } 
+        console.log(topTwoUnits[0][1] + " " + topTwoUnits[0][0] + " " + topTwoUnits[1][1] + " " + topTwoUnits[1][0]);
+      } else {
+        console.log(value + " " + new URL(window.location.href).searchParams.get("unit"));
+      }
+      
+    </script>
+    <!-- <script src="../core/options.js"></script>
+    <script src="../core/render.js"></script> -->
+  </body>
+</html>
+
+

@@ -53,7 +53,6 @@ async function processSticker(category, req, res) {
         buffer = await recordSticker(req.headers.host, category , stickerFile, type, 
             'option=' + option + 
             '&value=' + value + 
-            '&type=' + type + 
             '&goal=' + goal +
             '&addi_value=' + addi_value +
             '&unit=' + unit );
