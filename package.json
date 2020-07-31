@@ -9,10 +9,12 @@
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
+    "moment": "^2.27.0",
     "morgan": "~1.9.0",
     "nodemon": "^2.0.2",
     "paper": "^0.12.4",
-    "puppeteer": "^1.20.0"
+    "puppeteer": "^1.20.0",
+    "then-request": "^6.0.2"
   },
   "devDependencies": {},
   "scripts": {
