@@ -11,7 +11,9 @@ var stickers = {
     "heartbeat": "animations/heartbeat",
     "steps": "animations/steps",
     "food": "animations/food",
+    "time": "animations/time",
     "music": "animations/music",
+    "generic": "animations/generic",
 }
 
 var default_units = {
@@ -21,7 +23,7 @@ var default_units = {
     "music": "plays of"
 }
 
-async function recordFile(url, filename) {
+async function recordFile( url, filename) {
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
     const page = await browser.newPage();
     await page.goto(url, {waitUntil: 'networkidle2'});
@@ -36,89 +38,87 @@ async function recordFile(url, filename) {
 }
 
 
-async function recordSticker (server, category, filename, type, getParams) {
-    //return await recordFile('http://'+server+'/clock.html?'+ getParams, filename);
-    if (type === "plain-domain-agnostic-1" || 
-        type === "plain-domain-agnostic-2" ||
-        type === "plain-domain-agnostic-3") {
-            return await recordFile('http://'+ server + '/generic/' + type + '.html?'+ getParams, filename);
-        }
-    else {
+async function recordSticker (next, server, category, filename, type, getParams) {
+    try {
         return await recordFile('http://'+ server + '/' + category + '/' + type + '.html?'+ getParams, filename);
+    } catch (err) {
+        next(err)
     }
 };
 
-
-// async function processSticker(category, req, res) {
-//     var buffer;
-//     var value = req.query.value; // Input numeric value for sticker
-//     var option = req.query.option; // Animation options
-//     var type = req.query.type; // Type of sticker
-//     var goal = req.query.goal; // Input goal numeric value for chartjunk sticker
-//     var addi_value = req.query.addi_value; // Second input value for music sticker
-//     var unit = req.query.unit; // Custom unit
-
-//     var stickerFile = category + '_' + option + '_' + value + '_' + type + '_' + goal + '_' + addi_value + '_' + unit + '.gif';
-
-//     if(!value) {
-//         buffer = fs.readFileSync(uhohFile);
-//     }
-//     else if(fs.existsSync(stickerFile)) {
-//         buffer = fs.readFileSync(stickerFile);
-//     } else {
-//         buffer = await recordSticker(req.headers.host, category , stickerFile, type, 
-//             'option=' + option + 
-//             '&value=' + value + 
-//             '&goal=' + goal +
-//             '&addi_value=' + addi_value +
-//             '&unit=' + unit );
-//     }
-//     res.set('Content-Type', 'image/gif');
-//     res.send(buffer);
-
-// }
-
-async function processSticker(category, req, res) {
+async function processSticker(category, req, res, next) {
     var buffer;
     var text;
+    var stickerFile;
 
-    var value = req.query.value;
-    var color = req.query.color;
-    var unit = req.query.unit;
-    var option = req.query.option;
-    var type = req.query.type;
+    const type = req.query.type;                                    // ["plain", "chartjunk", "analogy"]
+    const variation = req.query.variation;                          // [1, 2, 3, ...]
+    const value = req.query.value;                                  // int[1...]
+    const unit = req.query.unit;                                    // string
+    const option = req.query.option;                                // ["shake", "pulse"]
+    const color = req.query.color ? req.query.color : "green";      // required only for generic (plain, chartjunk) endpoint* ["purple", "gold", "red", "green", "blue"] 
+    const goal = req.query.goal ? req.query.goal : req.query.value; // required only for chartjunk endpoint* int[1...]
+                                                                    // default to value param, if empty
 
-    var goal = req.query.goal;
-    var addi_value = req.query.addi_value;
-
-    if (unit != undefined) {
-        text = value + " " + unit
-    } else if (category === "time") {
-        text = processDefaultTimeText(value)
-    } else if (category === "music") {
-        text = value + " " + default_units[category] + " " + addi_value
-    } else {
-        text = value + " " + default_units[category]
+    // error handling
+    if (type === undefined) {
+        res.status(400).send("Missing \`type\` query parameter");
+        return;
     }
 
-    var stickerFile = category + '_' + option + '_' + text + '_' + type + '_' + goal + '_' + addi_value + '_' + color + '.gif';
-
-    if(!value) {
-        buffer = fs.readFileSync(uhohFile);
+    if (variation === undefined) {
+        res.status(400).send("Missing \`variation\` query parameter");
+        return;
     }
-    else if(fs.existsSync(stickerFile)) {
+
+    if (value === undefined) {
+        res.status(400).send("Missing \`value\` query parameter");
+        return;
+    }
+
+    if (unit === undefined) {
+        res.status(400).send("Missing \`unit\` query parameter");
+        return;
+    }
+
+    if (option === undefined) {
+        res.status(400).send("Missing \`option\` query parameter");
+        return;
+    }
+
+    switch (type) {
+        case "analogy":
+            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}.gif`
+            break;
+        case "chartjunk" && category === "generic":
+            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}.gif`
+            break;
+        case "chartjunk" && category != "generic":
+            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}.gif`
+            break;
+        case "plain" && category === "generic":
+            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${color}.gif`
+            break;
+        case "plain" && category != "generic":
+            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}.gif`
+            break;
+    }
+    
+    if(fs.existsSync(stickerFile)) {
         buffer = fs.readFileSync(stickerFile);
     } else {
-        buffer = await recordSticker(req.headers.host, category , stickerFile, type, 
-            'option=' + option + 
-            '&text=' + text + 
-            '&color=' + color + 
-            '&goal=' + goal +
-            '&addi_value=' + addi_value);
+        buffer = await recordSticker(
+            next, 
+            req.headers.host, 
+            category, 
+            stickerFile, 
+            `${type}-${variation}`, 
+            `value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}`);
     }
+
     res.set('Content-Type', 'image/gif');
     res.send(buffer);
-    // res.send(text);
+    res.send(text);
 }
 
 function processDefaultTimeText(ms) {
@@ -160,24 +160,27 @@ router.get('*', function(req, res, next) {
 });
 
 router.get('/heartbeat', async function(req, res, next) {
-    processSticker('heartbeat', req, res);   
+    processSticker('heartbeat', req, res, next);   
 });
 
 router.get('/steps', async function(req, res, next) {
-    processSticker('steps', req, res) ;  
+    processSticker('steps', req, res, next) ;  
 });
 
 router.get('/food', async function(req, res, next) {
-    processSticker('food', req, res);
+    processSticker('food', req, res, next);
 });
 
 router.get('/time', async function(req, res, next) {
-    processSticker('time', req, res);
+    processSticker('time', req, res, next);
 });
 
 router.get('/music', async function(req, res, next) {
-    processSticker('music', req, res);
+    processSticker('music', req, res, next);
 });
 
+router.get('/generic', async function(req, res, next) {
+    processSticker('generic', req, res, next);
+});
 
 module.exports = router;

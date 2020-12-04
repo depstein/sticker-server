@@ -112,9 +112,11 @@
       var svg = document.querySelector("svg");
       tl = gsap.timeline({ paused: true });
 
+      document.getElementById("halfpoint").textContent = Math.floor(new URL(
+        window.location.href
+      ).searchParams.get("goal") / 2);  
                 
     </script>
-    <!-- <script src="../core/options_v2.js"></script> -->
-    <script src="../core/render_chartjunk_2.js"></script>
+    <script src="../core/render_chartjunk_meter.js"></script>
   </body>
 </html>

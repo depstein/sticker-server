@@ -1,11 +1,12 @@
 document.getElementById("text").textContent = new URL(
   window.location.href
-).searchParams.get("text");
+).searchParams.get("value") + " " + new URL(
+  window.location.href
+).searchParams.get("unit");
 
 d3plus
   .textwrap()
   .container(d3.select("#text"))
-  .resize(true)
   .align("center")
   .valign("middle")
   .draw();

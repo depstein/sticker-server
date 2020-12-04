@@ -344,11 +344,11 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("text")
+          .get("value")
           .split(/ (.*)/)[0] / 550
       ).toFixed(1);
       document.getElementById("analogy_text").textContent =
-        analogy_value + " calories";
+        analogy_value + " " + new URL(window.location.href).searchParams.get("unit");
     </script>
     <script src="../core/options_v2.js"></script>
     <script src="../core/render_analogy.js"></script>

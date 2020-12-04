@@ -195,25 +195,34 @@
         <text class="cls-10" transform="translate(108 73.57)">
           ~290 calories
         </text>
-        <text class="cls-11" transform="translate(42.06 92.3)">
+        <text class="cls-11" transform="translate(26.06 92.3)">
           <tspan id="value">532</tspan>
           <tspan id="unit" x="0" y="20">calories</tspan>
         </text>
-        <text class="cls-12" transform="translate(49.06 128.83)">
+        <rect fill="none" x="26" y="118" width="80" height="65" />
+        <text fill="#0a0a0a" id="text" class="cls-12 wrap"></text>
+        <!-- <text class="cls-12" transform="translate(49.06 128.83)">
           <tspan id="analogy_text">1.8 x a slice</tspan>
           <tspan x="0" y="17">of pizza</tspan>
-        </text>
+        </text> -->
       </g>
     </svg>
 
     <script>
-      var analogy_value = parseFloat(
-        new URL(window.location.href).searchParams
-          .get("text")
-          .split(/ (.*)/)[0] / 150
-      ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + " x a slice";
+      var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value").split(/ (.*)/)[0] / 150).toFixed(1);
+      if (new URL(window.location.href).searchParams.get("unit") == "calories") {
+        document.getElementById("text").textContent = analogy_value + " x a slice of pizza"
+      } else {
+        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+        " per calorie of a slice of pizza";
+      }
+
+        d3plus
+        .textwrap()
+        .container(d3.select("#text"))
+        .resize(false)   
+        .draw();
+
     </script>
     <script src="../core/options_v2.js"></script>
     <script src="../core/render_analogy.js"></script>

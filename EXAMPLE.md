@@ -1,0 +1,1 @@
+/food/?type=analogy&variation=1&value=2500&unit=calories&option=shake

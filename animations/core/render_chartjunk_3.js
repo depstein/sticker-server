@@ -1,6 +1,8 @@
 document.getElementById("text").textContent = new URL(
   window.location.href
-).searchParams.get("text");
+).searchParams.get("value") + " " + new URL(
+  window.location.href
+).searchParams.get("unit");
 
 document.getElementById("goal").textContent = new URL(
   window.location.href
@@ -14,7 +16,7 @@ document.getElementById("midpoint").textContent = new URL(
 d3plus
   .textwrap()
   .container(d3.select("#text"))
-  .resize(true)
+  .resize(false)
   .align("center")
   .valign("middle")
   .draw();

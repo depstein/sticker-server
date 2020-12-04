@@ -1,6 +1,9 @@
 document.getElementById("text").textContent = new URL(
   window.location.href
-).searchParams.get("text");
+).searchParams.get("value") + " " + new URL(
+  window.location.href
+).searchParams.get("unit");
+
 
 document.getElementById("goal").textContent = new URL(
   window.location.href

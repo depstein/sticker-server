@@ -78,7 +78,7 @@
           }
           .cls-20,
           .cls-8 {
-            fill: #f79437;
+            fill: #fce2c9;
           }
           .cls-11,
           .cls-20,
@@ -463,7 +463,7 @@
             <tspan id="unit" x="0" y="20">calories</tspan>
           </text>
           <text class="cls-30" transform="translate(25.49 125.13)">
-            <tspan id="analogy_text">0.6 calories</tspan>
+            <tspan id="analogy_text"></tspan>
             <tspan x="0" y="14">per pound</tspan>
             <tspan x="0" y="28">of a horse</tspan>
           </text>
@@ -474,10 +474,11 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("text")
+          .get("value")
           .split(/ (.*)/)[0] / 930).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + " calories";
+     
+        document.getElementById("analogy_text").textContent =
+          analogy_value + " " + new URL(window.location.href).searchParams.get("unit");
     </script>
     <script src="../core/options_v2.js"></script>
     <script src="../core/render_analogy.js"></script>
