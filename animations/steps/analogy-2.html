@@ -67,16 +67,14 @@
         </style>
       </defs>
       <g id="cutlines">
-        <text class="cls-1" transform="translate(49.31 158.67)">
-          <tspan id="value">5,793</tspan>
-          <tspan id="unit" class="cls-2" x="0" y="20">steps</tspan>
+        <text class="cls-1" transform="translate(40.31 158.67)">
+          <tspan id="value"></tspan> <tspan id="unit" class="cls-2"></tspan>
+          
         </text>
       </g>
       <g id="sticker">
-        <text class="cls-3" transform="translate(109.5 158.67)">
-          <tspan id="analogy_text">11x around</tspan>
-          <tspan x="0" y="17.71">a track</tspan>
-        </text>
+        <rect fill="none" x="40.31" y="165.67" width="150" height="45" />
+        <text fill="#0a0a0a" id="text" class="cls-3 wrap"></text>
         <path
           class="cls-4"
           d="M80.39,132a36.45,36.45,0,0,1,0-72.9h59.1a36.45,36.45,0,0,1,0,72.9Z"
@@ -232,11 +230,20 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("text")
-          .split(/ (.*)/)[0] / 525
+          .get("value") / 525
       ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + "x around";
+      if (new URL(window.location.href).searchParams.get("unit") == "steps") {
+        document.getElementById("text").textContent = analogy_value + " x around a track"
+      } else {
+        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+        " per step of a track";
+      }
+
+      d3plus
+        .textwrap()
+        .container(d3.select("#text"))
+        .resize(false)   
+        .draw();
     </script>
     <script src="../core/options_v2.js"></script>
     <script src="../core/render_analogy.js"></script>

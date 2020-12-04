@@ -106,8 +106,7 @@
       <g class="cls-2">
         <g id="cutlines">
           <text class="cls-3" transform="translate(21.97 153.68)">
-            <tspan id="value">5,793</tspan>
-            <tspan id="unit" class="cls-4" x="0" y="20">steps</tspan>
+            <tspan id="value"></tspan> <tspan id="unit" class="cls-4"></tspan>
           </text>
         </g>
         <g id="sticker">
@@ -566,10 +565,14 @@
             class="cls-12"
             d="M115.8,60.09a.21.21,0,0,1,.07.15,1.47,1.47,0,0,1-.28.86.24.24,0,0,1-.22.08l-.53-.17c-.17-.06-.34-.13-.49-.17a1.84,1.84,0,0,0-1.53.13,1.79,1.79,0,0,0-.57,1.28.72.72,0,0,0,.27.6,1.51,1.51,0,0,0,1,.16h.13a4.88,4.88,0,0,1,1.33-.06,2.77,2.77,0,0,1,1.86,1,2,2,0,0,1,.35,1.63,3.67,3.67,0,0,1-1.8,2.5,2.66,2.66,0,0,1-2.25.13,4,4,0,0,1-2-2,1,1,0,0,1-.09-.41v-.06l0,0a3.26,3.26,0,0,1,1-.32.2.2,0,0,1,.22.13,2.55,2.55,0,0,0,1.56,1.51.94.94,0,0,0,.81-.1,2.08,2.08,0,0,0,.93-1.89,1,1,0,0,0-.54-.72,1.36,1.36,0,0,0-.49-.11,3.06,3.06,0,0,0-.6,0l-.2,0-.14,0a3.51,3.51,0,0,1-1.78-.15,2.24,2.24,0,0,1-1.22-2.35,3.15,3.15,0,0,1,.75-1.7,3,3,0,0,1,2.16-.68A3.27,3.27,0,0,1,115.8,60.09Z"
           />
-          <text class="cls-13" transform="translate(82.87 153.08)">
-            <tspan id="analogy_text">1.6x the Golden</tspan>
-            <tspan x="0" y="20">Gate Bridge</tspan>
-          </text>
+          <!-- <text class="cls-13" transform="translate(20.87 173.08)">
+            <tspan id="analogy_text"></tspan> <tspan x="0" y="20">Gate Bridge</tspan>
+          </text> -->
+
+
+          <rect fill="none" x="20.87" y="160.08" width="150" height="45" />
+          <text font-size="14pt" fill="#0a0a0a" id="text" class="cls-13 wrap"></text>
+
         </g>
       </g>
     </svg>
@@ -577,11 +580,22 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("text")
-          .split(/ (.*)/)[0] / 3592
+          .get("value") / 3592
       ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + "x the Golden";
+
+      if (new URL(window.location.href).searchParams.get("unit") == "steps") {
+        document.getElementById("text").textContent = analogy_value + " x the Golden Gate Bridge"
+      } else {
+        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+        " per step of the Golden Gate Bridge";
+      }
+
+
+      d3plus
+        .textwrap()
+        .container(d3.select("#text"))
+        .resize(false)   
+        .draw();
     </script>
     <script src="../core/options_v2.js"></script>
     <script src="../core/render_analogy.js"></script>

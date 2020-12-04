@@ -24,8 +24,10 @@ var default_units = {
 }
 
 async function recordFile( url, filename) {
+    // TODO: add error handling for 404 on puppeteer
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
     const page = await browser.newPage();
+    
     await page.goto(url, {waitUntil: 'networkidle2'});
 
     var element = await page.waitForSelector("#test");
@@ -40,6 +42,8 @@ async function recordFile( url, filename) {
 
 async function recordSticker (next, server, category, filename, type, getParams) {
     try {
+        console.log('http://'+ server + '/' + category + '/' + type + '.html?'+ getParams)
+        console.log(filename)
         return await recordFile('http://'+ server + '/' + category + '/' + type + '.html?'+ getParams, filename);
     } catch (err) {
         next(err)
@@ -90,22 +94,27 @@ async function processSticker(category, req, res, next) {
         case "analogy":
             stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}.gif`
             break;
-        case "chartjunk" && category === "generic":
-            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}.gif`
+        case "chartjunk":
+            if (category === "generic") {
+                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}.gif`
+            } 
+            else {
+                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}.gif`
+            }
             break;
-        case "chartjunk" && category != "generic":
-            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}.gif`
-            break;
-        case "plain" && category === "generic":
-            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${color}.gif`
-            break;
-        case "plain" && category != "generic":
-            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}.gif`
+        case "plain":
+            if (category === "generic") {
+                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${color}.gif`
+            }
+            else {
+                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}.gif`
+            }
             break;
     }
     
     if(fs.existsSync(stickerFile)) {
         buffer = fs.readFileSync(stickerFile);
+        console.log(`-- Served from ${stickerFile} cache`);
     } else {
         buffer = await recordSticker(
             next, 
@@ -118,7 +127,6 @@ async function processSticker(category, req, res, next) {
 
     res.set('Content-Type', 'image/gif');
     res.send(buffer);
-    res.send(text);
 }
 
 function processDefaultTimeText(ms) {
