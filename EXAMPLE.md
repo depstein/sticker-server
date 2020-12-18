@@ -53,7 +53,7 @@
 
 <br><br>
 
-# /heaetbeat
+# /heartbeat
 
 ## Examples
 
