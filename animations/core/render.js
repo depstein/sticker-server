@@ -2,12 +2,11 @@
 var svg = document.querySelector("svg");
 
 var option = new URL(window.location.href).searchParams.get("option");
-var value = new URL(window.location.href).searchParams.get("value");
-var unit = new URL(window.location.href).searchParams.get("unit");
+
 
 // Select type of animation based on the value of the "animation" query parameter
 // options = [pulse, shake, count]
-var gsap_animation = animation_options(svg, option, value);
+var gsap_animation = animation_options(svg, option);
 
 if(option === "count") {
     var repeat_mode = -1;
@@ -15,13 +14,6 @@ if(option === "count") {
 else if(option === "pulse" || option === "shake") {
     var repeat_mode = 0;
 }
-
-if(unit !== null){
-  document.getElementById("unit").textContent = unit;
-}
-
-// Setting the variable value on the sticker based on the value of the "var" query parameter
-document.getElementById("value").textContent = new URL(window.location.href).searchParams.get("value");
 
 // Array containing img elements of animation frames to be render into an Gif
 var renderedFrames = [];

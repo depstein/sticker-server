@@ -95,26 +95,19 @@
           .cls-17 {
             fill: #31313d;
           }
-          .cls-18 {
-            font-size: 13.09px;
+          
+          #text {
+            font-size: 19.05px;
             fill: #902d7c;
+            stroke: #902d7c;
+            font-family: MyDearWatson-Regular, My Dear Watson;
           }
         </style>
       </defs>
       <g id="sticker">
-        <text class="cls-2" transform="translate(130.4 74.97)">
-          105 beats
-          <tspan x="0" y="12">per minute</tspan>
-        </text>
-        <text class="cls-3" transform="translate(36.21 119.05)">
-          <tspan id="analogy_text"></tspan>
-          <tspan x="0" y="15">tempo of</tspan>
-          <tspan x="0" y="30">&quot;Rolling in</tspan>
-          <tspan x="0" y="45">the Deep&quot;</tspan>
-        </text>
-        <text class="cls-4" transform="translate(36.21 84.56)">
-          <tspan id="value"></tspan> 
-          <tspan id="unit" x="0" y="17"></tspan>
+
+        <text class="cls-4" transform="translate(24.21 84.56)">
+          <tspan id="value"></tspan> <tspan id="unit"></tspan>
         </text>
         <path
           class="cls-5"
@@ -217,18 +210,32 @@
         >
           Adele
         </text>
+
+        <rect fill="none" x="24.87" y="92.08" width="50" height="100" />
+        <text font-size="14pt" fill="#0a0a0a" id="text"></text>
       </g>
     </svg>
 
-    <script>
-      var analogy_value = parseFloat(
-        new URL(window.location.href).searchParams
-          .get("text")
-          .split(/ (.*)/)[0] / 105
-      ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + "x the";
-    </script>
+<script>
+  var analogy_value = parseFloat(
+    new URL(window.location.href).searchParams
+      .get("value") / 105
+  ).toFixed(1);
+
+  if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
+    document.getElementById("text").textContent = analogy_value + " x the tempo of 'Rolling in the Deep"
+  } else {
+    document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+    " per tempo of 'Rolling in the Deep'";
+  }
+
+
+  d3plus
+    .textwrap()
+    .container(d3.select("#text"))
+    .resize(false)   
+    .draw();
+</script>
     <script src="../core/options_v2.js"></script>
     <script src="../core/render_analogy.js"></script>
   </body>

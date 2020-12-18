@@ -32,7 +32,7 @@
           <circle class="cls-4" cx="161.14" cy="79.58" r="1.31" />
           <circle class="cls-4" cx="140.34" cy="58.93" r="1.31" />
           <rect class="cls-5" x="78" y="78" width="70" height="60" />
-          <text fill="#0a0a0a" id="text" class="cls-6 wrap" font-size="19"></text>
+          <text fill="#0a0a0a" id="text" class="cls-6 wrap" font-size="16"></text>
       </g>
   </svg>
 
@@ -50,9 +50,9 @@
       var colorSelection = new URL(window.location.href).searchParams.get("color");
       document.getElementById("main").setAttribute("style", "fill:" + color[colorSelection]["main"]);
       document.getElementById("shadow").setAttribute("style", "fill:" + color[colorSelection]["shadow"]);
-
     </script>
+    <script src="../core/textwrap.js"></script>
     <script src="../core/options_v2.js"></script>
-    <script src="../core/render_v2.js"></script>
+    <script src="../core/render.js"></script>
   </body>
 </html>

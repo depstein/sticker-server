@@ -52,13 +52,30 @@
 [Public](https://sheltered-waters-08469.herokuapp.com/food/?type=plain&variation=3&value=2500&unit=calories&option=pulse) | [Local](http://localhost:5000/food/?type=plain&variation=3&value=2500&unit=calories&option=pulse)
 
 <br><br>
+
+# /heaetbeat
+
+## Examples
+
+### Plain (Domain Relevant)
+* /heartbeat/?type=plain&variation=1&value=110&unit=beats%20per%20minute&option=pulse
+[Public](https://sheltered-waters-08469.herokuapp.com/heartbeat/?type=plain&variation=1&value=110&unit=beats%20per%20minute&option=pulse) | [Local](http://localhost:5000/heartbeat/?type=plain&variation=1&value=110&unit=beats%20per%20minute&option=pulse)
+
+* /heartbeat/?type=plain&variation=2&value=110&unit=beats%20per%20minute&option=pulse
+[Public](https://sheltered-waters-08469.herokuapp.com/heartbeat/?type=plain&variation=2&value=110&unit=beats%20per%20minute&option=pulse) | [Local](http://localhost:5000/heartbeat/?type=plain&variation=2&value=110&unit=beats%20per%20minute&option=pulse)
+
+* /heartbeat/?type=plain&variation=3&value=110&unit=beats%20per%20minute&option=pulse
+[Public](https://sheltered-waters-08469.herokuapp.com/heartbeat/?type=plain&variation=3&value=110&unit=beats%20per%20minute&option=pulse) | [Local](http://localhost:5000/heartbeat/?type=plain&variation=3&value=110&unit=beats%20per%20minute&option=pulse)
+
+<br><br>
+
 # /steps
 
 ## Examples
 
 ### Analogy (Domain Agnostic)
 * /steps/?type=analogy&variation=1&value=2000&unit=steps&option=pulse
-[Public](https://sheltered-waters-08469.herokuapp.com/steps/?type=analogy&variation=1&value=2000&unit=steps&option=pulse) | [Local](http://localhost:5000/steps/?type=analogy&variation=1&value=2000&unit=steps&option=pulsee)
+[Public](https://sheltered-waters-08469.herokuapp.com/steps/?type=analogy&variation=1&value=2000&unit=steps&option=pulse) | [Local](http://localhost:5000/steps/?type=analogy&variation=1&value=2000&unit=steps&option=pulse)
 
 * /steps/?type=analogy&variation=2&value=2000&unit=steps&option=pulse
 [Public](https://sheltered-waters-08469.herokuapp.com/steps/?type=analogy&variation=2&value=2000&unit=steps&option=pulse) | [Local](http://localhost:5000/steps/?type=analogy&variation=2&value=2000&unit=steps&option=pulse)
@@ -66,6 +83,15 @@
 * /steps/?type=analogy&variation=3&value=2000&unit=steps&option=pulse
 [Public](https://sheltered-waters-08469.herokuapp.com/steps/?type=analogy&variation=3&value=2000&unit=steps&option=pulse) | [Local](http://localhost:5000/steps/?type=analogy&variation=3&value=2000&unit=steps&option=pulse)
 
+### Chartjunk (Domain Agnostic)
+* /steps/?type=chartjunk&variation=1&value=2000&unit=steps&option=pulse&goal=3000
+[Public](https://sheltered-waters-08469.herokuapp.com/steps/?type=chartjunk&variation=1&value=2000&unit=steps&option=pulse&goal=3000) | [Local](http://localhost:5000/steps/?type=chartjunk&variation=1&value=2000&unit=steps&option=pulse&goal=3000)
+
+* /steps/?type=chartjunk&variation=2&value=2000&unit=steps&option=pulse&goal=3000
+[Public](https://sheltered-waters-08469.herokuapp.com/steps/?type=chartjunk&variation=2&value=2000&unit=steps&option=pulse&goal=3000) | [Local](http://localhost:5000/steps/?type=chartjunk&variation=2&value=2000&unit=steps&option=pulse&goal=3000)
+
+* /steps/?type=chartjunk&variation=3&value=2000&unit=steps&option=pulse&goal=3000
+[Public](https://sheltered-waters-08469.herokuapp.com/steps/?type=chartjunk&variation=3&value=2000&unit=steps&option=pulse&goal=3000) | [Local](http://localhost:5000/steps/?type=chartjunk&variation=3&value=2000&unit=steps&option=pulse&goal=3000)
 
 
 ### Plain (Domain Relevant)

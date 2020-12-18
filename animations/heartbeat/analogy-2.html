@@ -88,21 +88,22 @@
           .cls-16 {
             fill: #de8585;
           }
+
+          #text {
+            font-size: 19.05px;
+            fill: #61b2c3;
+            stroke: #61b2c3;
+            font-family: MyDearWatson-Regular, My Dear Watson;
+          }
         </style>
       </defs>
       <g id="sticker">
-        <text class="cls-2" transform="translate(34.71 98.06)">
-          <tspan id="value">108</tspan>
-          beats
-          <tspan id="unit" x="0" y="18">per minute</tspan>
+        <text class="cls-2" transform="translate(17.71 74.06)">
+          <tspan id="value"></tspan> <tspan id="unit"></tspan>
         </text>
-        <text class="cls-3" transform="translate(125.13 67.7)">
+        <text class="cls-3" transform="translate(60.13 147.7)">
           ~80 beats
           <tspan x="0" y="12">per minute</tspan>
-        </text>
-        <text class="cls-4" transform="translate(36.13 136.76)">
-          <tspan id="analogy_text">1.4x a resting</tspan>
-          <tspan x="0" y="15">heart rate</tspan>
         </text>
         <path
           class="cls-5"
@@ -208,18 +209,31 @@
           class="cls-16"
           d="M136.75,128.41a36,36,0,0,1-9.89,5.45,2,2,0,0,1-2.66-1.73c-.26-3.28-.47-9.25.88-14.26C124.24,123.89,124.47,133.79,136.75,128.41Z"
         />
+
+        <rect fill="none" x="17.87" y="85.08" width="100" height="50" />
+        <text font-size="14pt" fill="#0a0a0a" id="text"></text>
       </g>
     </svg>
 
-    <script>
-      var analogy_value = parseFloat(
-        new URL(window.location.href).searchParams
-          .get("text")
-          .split(/ (.*)/)[0] / 80
-      ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + "x a resting";
-    </script>
+<script>
+  var analogy_value = parseFloat(
+    new URL(window.location.href).searchParams
+      .get("value") / 80
+  ).toFixed(1);
+
+  if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
+    document.getElementById("text").textContent = analogy_value + " x a resting heart rate"
+  } else {
+    document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+    " per resting heart rate";
+  }
+
+  d3plus
+    .textwrap()
+    .container(d3.select("#text"))
+    .resize(false)   
+    .draw();
+</script>
     <script src="../core/options_v2.js"></script>
     <script src="../core/render_analogy.js"></script>
   </body>
