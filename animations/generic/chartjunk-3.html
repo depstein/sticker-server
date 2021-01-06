@@ -54,8 +54,8 @@
     </g>
     <g id="Layer_1" data-name="Layer 1">
       <path class="cls-2" d="M172.12,142h-3.47a60.16,60.16,0,0,0-15-32.17c-17.73-20-58.64-28.29-87-2.23-9.81,9-15.53,21.3-17.2,34.4H46a8.72,8.72,0,1,0,0,17.44H99.16a13.17,13.17,0,0,0,19.81,0h53.15a8.72,8.72,0,1,0,0-17.44Z" />
-      <rect class="cls-3" x="63.68" y="31.56" width="106.49" height="66.49" />
-      <text id="text" fill="#4c3d63"></text>
+      <rect class="cls-3" x="55.68" y="31.56" width="106.49" height="66.49" />
+      <text id="text" fill="#4c3d63" font-size="14px"></text>
   </g>
   <g id="Layer_1_copy" data-name="Layer 1 copy">
       <path class="cls-4" d="M57.6,150.66v-.91c0-28.38,22.7-50.61,51.67-50.61a55.85,55.85,0,0,1,5.76.3,51.88,51.88,0,0,1,32.63,16.21,50,50,0,0,1,13.28,34.1v.91Z" />
@@ -82,7 +82,7 @@
       <path fill="#0a0a0a" d="M122.93,108.86a.84.84,0,0,1-.27,0,.88.88,0,0,1-.57-1.11l2-6.19a.88.88,0,0,1,1.68.54l-2,6.19A.89.89,0,0,1,122.93,108.86Z" />
       <path class="cls-2" d="M120.42,137.89a1,1,0,0,1-.55-1.73l20.37-14.49a1,1,0,1,1,1.11,1.55L121,137.72A.92.92,0,0,1,120.42,137.89Z" />
       <path class="cls-2" d="M127.94,137.89a.92.92,0,0,1-.77-.39,1,1,0,0,1,.2-1.33l9.87-7.25a1,1,0,0,1,1.13,1.54l-9.87,7.25A1,1,0,0,1,127.94,137.89Z" />
-      <text id="halfpoint" class="cls-9" transform="translate(109.07 116.03)" text-anchor="middle"></text>
+      <text id="midpoint" class="cls-9" transform="translate(109.07 116.03)" text-anchor="middle"></text>
       <text id="goal" class="cls-9" transform="translate(149.29 143.17)" text-anchor="middle"></text>
       <text class="cls-9" transform="translate(65.67 143.17)" >0</text>
   </g>
@@ -112,11 +112,28 @@
       var svg = document.querySelector("svg");
       tl = gsap.timeline({ paused: true });
 
-      document.getElementById("halfpoint").textContent = Math.floor(new URL(
+      var maskPercentage = 18 + 162 * (new URL(
         window.location.href
-      ).searchParams.get("goal") / 2);  
+      ).searchParams.get("value") / new URL(
+        window.location.href
+      ).searchParams.get("goal"));
+      
+      var gsap_animation = 
+          tl.to("#fill-mask", {duration:1.5, rotation:maskPercentage, transformOrigin: "top center", stagger:0.4})
+          .to("#meter", {duration:1.5, rotation:maskPercentage, transformOrigin: "right center", stagger:0.4}, 0)
+                            .to(svg, 0.8, {
+                            scaleX: 1.05,
+                            scaleY: 1.05,
+                            ease: Elastic.easeOut,
+                            repeatDelay: 0.5,
+                            repeat: 0
+                            });
+
                 
     </script>
-    <script src="../core/render_chartjunk_meter.js"></script>
+    <script src="../core/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
+    <script src="../core/render_chartjunk.js"></script>
   </body>
 </html>

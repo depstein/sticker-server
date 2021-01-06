@@ -206,36 +206,41 @@
         <text class="cls-13" transform="translate(109.44 73.57)">
           ~540 calories
         </text>
-        <text class="cls-14" transform="translate(20.02 95.41)">
+        <!-- <text class="cls-14" transform="translate(20.02 95.41)">
           <tspan id="value">532</tspan>
           <tspan id="unit" x="0" y="20">calories</tspan>
         </text>
         <rect fill="none" x="20" y="122" width="80" height="65" />
         <text fill="#0a0a0a" id="text" class="cls-15 wrap"></text>
+         -->
+        <rect fill="none" x="24" y="60" width="65" height="95"></rect>
+        <text id="text" font-size="20px" class="cls-14 wrap"></text>
+
+        <rect fill="none" x="24" y="150" width="155" height="30"></rect>
+        <text id="analogy" class="cls-15 wrap"></text>
+
         <!-- <text id="analogy_text" class="cls-15" transform="translate(26.02 131.83)">
           1 x a burger
         </text> -->
       </g>
     </svg>
+
+    <section></section>
     
     <script>
       var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value") / 540).toFixed(1);
       if (new URL(window.location.href).searchParams.get("unit") == "calories") {
-        document.getElementById("text").textContent = analogy_value + " x a burger"
+        document.getElementById("analogy").textContent = analogy_value + " x a burger"
       } else {
-        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+        document.getElementById("analogy").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
         " per calorie of a burger";
       }
 
-        d3plus
-        .textwrap()
-        .container(d3.select("#text"))
-        .resize(false)   
-        .draw();
-
-
     </script>
-    <script src="../core/options_v2.js"></script>
+    <script src="../core/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
     <script src="../core/render_analogy.js"></script>
   </body>
 </html>

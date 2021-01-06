@@ -131,38 +131,44 @@
         <text class="cls-8" transform="translate(108 73.57)">
           ~150 calories
         </text>
-        <text class="cls-9" transform="translate(30.37 85.38)">
+        <!-- <text class="cls-9" transform="translate(30.37 85.38)">
           <tspan id="value">532</tspan>
           <tspan id="unit" x="0" y="20">calories</tspan>
         </text>
 
         <rect fill="none" x="30" y="112" width="80" height="65" />
-        <text fill="#0a0a0a" id="text" class="cls-10 wrap"></text>
+        <text fill="#0a0a0a" id="text" class="cls-10 wrap"></text> -->
         <!-- <text class="cls-10" transform="translate(42.81 120.25)">
           <tspan id="analogy_text">3.5 x a</tspan>
           <tspan x="0" y="15">chocolate</tspan>
           <tspan x="0" y="30">chip cookie</tspan>
         </text> -->
+
+        <rect fill="none" x="24" y="60" width="65" height="95"></rect>
+        <text id="text" font-size="20px" class="cls-9 wrap"></text>
+
+        <rect fill="none" x="24" y="165" width="155" height="30"></rect>
+        <text id="analogy" class="cls-10 wrap"></text>
+
       </g>
     </svg>
+
+    <section></section>
 
     <script>
       var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value").split(/ (.*)/)[0] / 150).toFixed(1);
       if (new URL(window.location.href).searchParams.get("unit") == "calories") {
-        document.getElementById("text").textContent = analogy_value + " x a chocolate chip cookie"
+        document.getElementById("analogy").textContent = analogy_value + " x a chocolate chip cookie"
       } else {
-        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+        document.getElementById("analogy").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
         " per calorie of a chocolate chip cookie";
       }
 
-        d3plus
-        .textwrap()
-        .container(d3.select("#text"))
-        .resize(false)   
-        .draw();
-
     </script>
-    <script src="../core/options_v2.js"></script>
+    <script src="../core/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
     <script src="../core/render_analogy.js"></script>
   </body>
 </html>

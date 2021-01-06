@@ -151,7 +151,7 @@
             font-family: MyDearWatson-Regular, My Dear Watson;
           }
           .cls-29 {
-            font-size: 23px;
+            font-size: 18px;
             fill: #b760c2;
             stroke: #b760c2;
             stroke-width: 0.65px;
@@ -458,29 +458,31 @@
           <text class="cls-28" transform="translate(143.02 75.35)">
             ~930 lbs
           </text>
-          <text class="cls-29" transform="translate(26.49 90.09)">
-            <tspan id="value">532</tspan>
-            <tspan id="unit" x="0" y="20">calories</tspan>
-          </text>
-          <text class="cls-30" transform="translate(25.49 125.13)">
-            <tspan id="analogy_text"></tspan>
-            <tspan x="0" y="14">per pound</tspan>
-            <tspan x="0" y="28">of a horse</tspan>
-          </text>
+
+          <rect fill="none" x="24" y="60" width="65" height="95"></rect>
+          <text id="text" class="cls-29 wrap"></text>
+
+          <rect fill="none" x="24" y="160" width="155" height="30"></rect>
+          <text id="analogy" class="cls-30 wrap"></text>
+
         </g>
       </g>
     </svg>
 
+    <section></section>
+
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("value")
-          .split(/ (.*)/)[0] / 930).toFixed(1);
+          .get("value") / 930).toFixed(1);
      
-        document.getElementById("analogy_text").textContent =
-          analogy_value + " " + new URL(window.location.href).searchParams.get("unit");
+        document.getElementById("analogy").textContent =
+          analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a horse";
     </script>
-    <script src="../core/options_v2.js"></script>
+    <script src="../core/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
     <script src="../core/render_analogy.js"></script>
   </body>
 </html>

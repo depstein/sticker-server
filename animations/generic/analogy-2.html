@@ -133,15 +133,13 @@
         />
         <circle class="cls-6" cx="109.64" cy="133.04" r="0.65" />
         <text class="cls-7" transform="translate(119.87 76.43)">~330 lbs</text>
-        <text class="cls-8" transform="translate(26.79 94.51)">
-          <tspan id="value">532</tspan>
-          <tspan id="unit" x="0" y="20">calories</tspan>
-        </text>
-        <text class="cls-9" transform="translate(25.79 132.61)">
-          <tspan id="analogy_text"></tspan>
-          <tspan x="0" y="13.55">per pound of</tspan>
-          <tspan x="0" y="27.11">a panda bear</tspan>
-        </text>
+
+        <rect fill="none" x="24" y="60" width="65" height="95"></rect>
+        <text id="text" font-size= "18px" class="cls-8 wrap"></text>
+
+        <rect fill="none" x="24" y="170" width="165" height="30"></rect>
+        <text id="analogy" class="cls-9 wrap"></text>
+
         <path fill="#0a0a0a"
           d="M156.69,154a3.11,3.11,0,0,1-3-2.5,22.86,22.86,0,0,0-2.19-5.88l0,0-.05-.12c-1.91-3.26-4.57-4.61-9.17-4.61l-1.13,0a5.85,5.85,0,0,0-5,3.74,10.26,10.26,0,0,0-.89,5.43,3,3,0,0,1-3,3.44l-4.85,0a3.07,3.07,0,0,1-2.73-1.77c-5.92-12.12-7.25-24.64-7.31-33a1.09,1.09,0,0,1,0-.36,75.39,75.39,0,0,1,.57-10.09,2,2,0,0,1,0-.29l.16-1,4.24,3.67c.81.4,9.87,4.91,19.94,10.14,4.66,2.42,8.59,4.51,12,6.37,8.42,4.55,13.9,7.8,16.3,9.64,1.39,1.07,1.58,1.54,1.59,1.9a.75.75,0,0,1-.29.58c-.56.42-1.75,2-3.45,7.9-.4,1.34-.78,2.79-1.17,4.43a3,3,0,0,1-.78,1.4,3,3,0,0,1-2.12.92Z"
         />
@@ -225,17 +223,20 @@
       </g>
     </svg>
 
+    <section></section>
+
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("value")
-          .split(/ (.*)/)[0] / 330
-      ).toFixed(1);
+          .get("value") / 330).toFixed(1);
       
-      document.getElementById("analogy_text").textContent =
-        analogy_value + " " + new URL(window.location.href).searchParams.get("unit");
+      document.getElementById("analogy").textContent =
+        analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a panda bear";
     </script>
-    <script src="../core/options_v2.js"></script>
+    <script src="../core/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
     <script src="../core/render_analogy.js"></script>
   </body>
 </html>

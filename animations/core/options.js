@@ -1,12 +1,12 @@
 
-function animation_options(svg, param, value) {
-    var Cont={val:0} , NewVal = value ;
+function animation_options(svg, param) {
+    // var Cont={val:0} , NewVal = value ;
 
     switch (param) {
       case "pulse":
         return TweenMax.to(svg, 0.8, {
           scaleX: 1.05,
-          scaleY: 1.05,
+          scaleY: 1.15,
           ease: Elastic.easeOut,
           repeatDelay: 0.1
         });
@@ -20,13 +20,13 @@ function animation_options(svg, param, value) {
             ease: Elastic.easeOut.config(2, 0.2) 
       });
 
-      case "count":
-        return TweenLite.to(Cont , 1, {
-            val: NewVal, 
-            roundProps: "val", 
-            onUpdate: function(){
-                document.getElementById("value").innerHTML= Cont.val
-            }
-        });
+      // case "count":
+      //   return TweenLite.to(Cont , 1, {
+      //       val: NewVal, 
+      //       roundProps: "val", 
+      //       onUpdate: function(){
+      //           document.getElementById("value").innerHTML= Cont.val
+      //       }
+      //   });
     }
   };

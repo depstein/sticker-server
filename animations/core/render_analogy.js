@@ -1,6 +1,3 @@
-document.getElementById("value").textContent = new URL(window.location.href).searchParams.get("value");
-document.getElementById("unit").textContent = new URL(window.location.href).searchParams.get("unit");
-
 // Getting the svg element from the html page to be animated
 var svg = document.querySelector("svg");
 
@@ -25,7 +22,7 @@ async function processAnimationFrames() {
   // Getting the section elements to display each frames of the animation for debugging purposes
   var list = document.querySelector("section");
 
-  var fps = 24;
+  var fps = 14;
   var duration = gsap_animation.duration();
   var frames = Math.ceil((duration / 1) * fps);
   var current = 0;
@@ -44,7 +41,7 @@ async function processAnimationFrames() {
     img.onload = function() {
       // Append each frame into the <section> on the html page for debugging purposes
       // TODO: Disable when deployed for production
-      // list.appendChild(this);
+      list.appendChild(this);
       framesLoaded++;
 
       // Start rendering gif when all frames are fully loaded

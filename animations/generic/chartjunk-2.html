@@ -120,7 +120,7 @@
         <line class="cls-7" x1="126.7" y1="87.92" x2="134.15" y2="87.92" />
         <line class="cls-7" x1="126.7" y1="70.47" x2="134.15" y2="70.47" />
         <rect class="cls-8" x="65.43" y="88.69" width="64.99" height="48.26" />
-        <text id="text" fill="#4c3d63"></text>
+        <text id="text" fill="#4c3d63" font-size="14px"></text>
         <text
           id="goal"
           class="cls-9"
@@ -153,7 +153,26 @@
           
       var svg = document.querySelector("svg");
       tl = gsap.timeline({ paused: true });
+
+      var maskPercentage = Math.floor((new URL(
+        window.location.href
+      ).searchParams.get("value") / new URL(
+        window.location.href
+      ).searchParams.get("goal")) * -100);
+
+      
+      var gsap_animation = tl.to("#fill-mask", {duration:1, yPercent:maskPercentage, stagger:0.4})
+          .to(svg, 0.8, {
+          scaleX: 1.05,
+          scaleY: 1.05,
+          ease: Elastic.easeOut,
+          repeatDelay: 0.5,
+          repeat: 0
+          });
     </script>
+    <script src="../core/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
     <script src="../core/render_chartjunk.js"></script>
   </body>
 </html>

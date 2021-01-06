@@ -5,23 +5,6 @@ var fs = require('fs');
 var puppeteer = require('puppeteer');
 
 //TODO: better file storage/organization.
-var uhohFile = "animations/uhoh.gif";
-
-var stickers = {
-    "heartbeat": "animations/heartbeat",
-    "steps": "animations/steps",
-    "food": "animations/food",
-    "time": "animations/time",
-    "music": "animations/music",
-    "generic": "animations/generic",
-}
-
-var default_units = {
-    "heartbeat": "beats per minute",
-    "steps": "steps",
-    "food": "calories",
-    "music": "plays of"
-}
 
 async function recordFile( url, filename) {
     // TODO: add error handling for 404 on puppeteer
@@ -63,6 +46,7 @@ async function processSticker(category, req, res, next) {
     const color = req.query.color ? req.query.color : "green";      // required only for generic (plain, chartjunk) endpoint* ["purple", "gold", "red", "green", "blue"] 
     const goal = req.query.goal ? req.query.goal : req.query.value; // required only for chartjunk endpoint* int[1...]
                                                                     // default to value param, if empty
+    const time = req.query.time ? req.query.time : "false";
 
     // error handling
     if (type === undefined) {
@@ -92,22 +76,22 @@ async function processSticker(category, req, res, next) {
 
     switch (type) {
         case "analogy":
-            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}.gif`
+            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
             break;
         case "chartjunk":
             if (category === "generic") {
-                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}.gif`
+                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}_${time}.gif`
             } 
             else {
-                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}.gif`
+                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${time}.gif`
             }
             break;
         case "plain":
             if (category === "generic") {
-                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${color}.gif`
+                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${color}_${time}.gif`
             }
             else {
-                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}.gif`
+                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
             }
             break;
     }
@@ -122,7 +106,7 @@ async function processSticker(category, req, res, next) {
             category, 
             stickerFile, 
             `${type}-${variation}`, 
-            `value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}`);
+            `value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`);
     }
 
     res.set('Content-Type', 'image/gif');

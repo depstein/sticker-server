@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 230">
       <defs>
         <style>
           .cls-1,
@@ -172,7 +172,7 @@
         />
         <circle class="cls-5" cx="105.82" cy="138.79" r="0.69" />
         <text class="cls-6" transform="translate(114.11 78.56)">~550 lbs</text>
-        <text class="cls-7" transform="translate(20.62 87.08)">
+        <!-- <text class="cls-7" transform="translate(20.62 87.08)">
           <tspan id="value">532</tspan>
           <tspan id="unit" x="0" y="20">calories</tspan>
         </text>
@@ -180,7 +180,14 @@
           <tspan id="analogy_text">1 calories</tspan>
           <tspan x="0" y="16">per pound</tspan>
           <tspan x="0" y="32">of a pig</tspan>
-        </text>
+        </text> -->
+
+        <rect fill="none" x="24" y="60" width="65" height="95"></rect>
+        <text id="text" font-size="18px" class="cls-7 wrap"></text>
+
+        <rect fill="none" x="24" y="172" width="170" height="30"></rect>
+        <text id="analogy" class="cls-8 wrap"></text>
+
         <path
           class="cls-9"
           d="M165,161a3.89,3.89,0,0,1-1.87-.53.49.49,0,0,1-.18-.2c-.74-1.62-1.46-3.31-2.12-5s-1.24-3.38-1.74-4.95a.43.43,0,0,1,.06-.41.46.46,0,0,1,.37-.21,60.92,60.92,0,0,0,11.37-1.49H171a.48.48,0,0,1,.32.13.47.47,0,0,1,.14.43,36.53,36.53,0,0,1-1.34,5.15,19.69,19.69,0,0,1-3.39,6.51A2.75,2.75,0,0,1,165,161Z"
@@ -341,16 +348,20 @@
       </g>
     </svg>
 
+    <section></section>
+
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("value")
-          .split(/ (.*)/)[0] / 550
-      ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + " " + new URL(window.location.href).searchParams.get("unit");
+          .get("value") / 550).toFixed(1);
+
+      document.getElementById("analogy").textContent =
+        analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a pig";
     </script>
-    <script src="../core/options_v2.js"></script>
+    <script src="../core/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
     <script src="../core/render_analogy.js"></script>
   </body>
 </html>

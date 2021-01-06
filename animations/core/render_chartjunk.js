@@ -1,23 +1,3 @@
-document.getElementById("text").textContent = new URL(
-  window.location.href
-).searchParams.get("value") + " " + new URL(
-  window.location.href
-).searchParams.get("unit");
-
-document.getElementById("goal").textContent = new URL(
-  window.location.href
-).searchParams.get("goal");
-
-
-d3plus
-  .textwrap()
-  .container(d3.select("#text"))
-  .resize(true)
-  .align("center")
-  .valign("middle")
-  .draw();
-
-document.getElementById("text").setAttribute("transform", "translate(-25,35) rotate(-15)")
 
 // Getting the svg element from the html page to be animated
 var svg = document.querySelector("svg");
@@ -27,27 +7,8 @@ var svg = document.querySelector("svg");
 
 // Select type of animation based on the value of the "animation" query parameter
 // options = [pulse, shake, count]
-var maskPercentage = Math.floor((new URL(
-  window.location.href
-).searchParams.get("value") / new URL(
-  window.location.href
-).searchParams.get("goal")) * -100);
 
-var gsap_animation = tl.to("#fill-mask", {duration:1, yPercent:maskPercentage, stagger:0.4})
-                        .to(svg, 0.8, {
-                        scaleX: 1.05,
-                        scaleY: 1.05,
-                        ease: Elastic.easeOut,
-                        repeatDelay: 0.5,
-                        repeat: 0
-                        });
 
-// if(option === "count") {
-//     var repeat_mode = -1;
-// }
-// else if(option === "pulse" || option === "shake") {
-//     var repeat_mode = 0;
-// }
 
 // Array containing img elements of animation frames to be render into an Gif
 var renderedFrames = [];
@@ -57,7 +18,7 @@ async function processAnimationFrames() {
   // Getting the section elements to display each frames of the animation for debugging purposes
   var list = document.querySelector("section");
 
-  var fps = 24;
+  var fps = 14;
   var duration = gsap_animation.duration();
   var frames = Math.ceil((duration / 1) * fps);
   var current = 0;

@@ -112,11 +112,10 @@
         />
         <circle fill="#0a0a0a" class="cls-2" cx="79.41" cy="138.78" r="2.1" />
 
-        <text id="goal" class="cls-8" transform="translate(95.09 49.21)">1000</text>
+        <text id="goal" class="cls-8" transform="translate(95.09 49.21)"></text>
 
         <rect class="cls-3" x="96.21" y="74.73" width="76.65" height="52.98" />
-
-        <text id="text" fill="#964f9f"></text>
+        <text font-size="14px" id="text" fill="#964f9f"></text>
       </g>
     </svg>
 
@@ -140,11 +139,29 @@
         document
           .getElementById("text")
           .setAttribute("style", "fill:" + color[colorSelection]["text"]);
-          
-
+        
       var svg = document.querySelector("svg");
       tl = gsap.timeline({ paused: true });
+
+      var maskPercentage = Math.floor((new URL(
+        window.location.href
+      ).searchParams.get("value") / new URL(
+        window.location.href
+      ).searchParams.get("goal")) * -100);
+
+      
+      var gsap_animation = tl.to("#fill-mask", {duration:1, yPercent:maskPercentage, stagger:0.4})
+          .to(svg, 0.8, {
+          scaleX: 1.05,
+          scaleY: 1.05,
+          ease: Elastic.easeOut,
+          repeatDelay: 0.5,
+          repeat: 0
+          });
     </script>
+    <script src="../core/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
     <script src="../core/render_chartjunk.js"></script>
   </body>
 </html>

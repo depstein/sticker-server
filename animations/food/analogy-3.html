@@ -195,36 +195,41 @@
         <text class="cls-10" transform="translate(108 73.57)">
           ~290 calories
         </text>
-        <text class="cls-11" transform="translate(26.06 92.3)">
+        <!-- <text class="cls-11" transform="translate(26.06 92.3)">
           <tspan id="value">532</tspan>
           <tspan id="unit" x="0" y="20">calories</tspan>
         </text>
         <rect fill="none" x="26" y="118" width="80" height="65" />
-        <text fill="#0a0a0a" id="text" class="cls-12 wrap"></text>
+        <text fill="#0a0a0a" id="text" class="cls-12 wrap"></text> -->
         <!-- <text class="cls-12" transform="translate(49.06 128.83)">
           <tspan id="analogy_text">1.8 x a slice</tspan>
           <tspan x="0" y="17">of pizza</tspan>
         </text> -->
+
+        <rect fill="none" x="24" y="60" width="65" height="95"></rect>
+        <text id="text" font-size="20px" class="cls-11 wrap"></text>
+
+        <rect fill="none" x="24" y="165" width="155" height="30"></rect>
+        <text id="analogy" class="cls-12 wrap"></text>
       </g>
     </svg>
+
+    <section></section>
 
     <script>
       var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value").split(/ (.*)/)[0] / 150).toFixed(1);
       if (new URL(window.location.href).searchParams.get("unit") == "calories") {
-        document.getElementById("text").textContent = analogy_value + " x a slice of pizza"
+        document.getElementById("analogy").textContent = analogy_value + " x a slice of pizza"
       } else {
-        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+        document.getElementById("analogy").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
         " per calorie of a slice of pizza";
       }
 
-        d3plus
-        .textwrap()
-        .container(d3.select("#text"))
-        .resize(false)   
-        .draw();
-
     </script>
-    <script src="../core/options_v2.js"></script>
+        <script src="../core/moment.js"></script>
+        <script src="../core/timeparser.js"></script>
+        <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
     <script src="../core/render_analogy.js"></script>
   </body>
 </html>
