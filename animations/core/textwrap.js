@@ -5,8 +5,6 @@ const GOAL = new URL(window.location.href).searchParams.get("goal") ? new URL(wi
 
 const STICKER_TYPE = new URL(window.location.href).pathname.replace(/\/.{0,}\//gm, '').replace(/-\d.html/gm, '');
 
-console.log(STICKER_TYPE);
-
 if (TIME === "true") 
 {
   document.getElementById("text").textContent = processDefaultTimeText(VALUE);

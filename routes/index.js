@@ -1,11 +1,14 @@
 var express = require('express');
-var moment = require('moment');
 var router = express.Router();
 var fs = require('fs');
 var puppeteer = require('puppeteer');
 
 //TODO: better file storage/organization.
 
+// Spawn a headless Chromium browser via Puppeteer 
+// -> Launch the appropriate sticker HTML file 
+// -> Sticker rendering
+// -> Return the rendered sticker gif file
 async function recordFile( url, filename) {
     // TODO: add error handling for 404 on puppeteer
     const browser = await puppeteer.launch({args: ['--no-sandbox','--disable-setuid-sandbox',]});
@@ -22,17 +25,17 @@ async function recordFile( url, filename) {
     return file;
 }
 
-
+// Forward URL and query params to Puppeteer, catch any errors
 async function recordSticker (next, server, category, filename, type, getParams) {
     try {
-        console.log('http://'+ server + '/' + category + '/' + type + '.html?'+ getParams)
-        console.log(filename)
         return await recordFile('http://'+ server + '/' + category + '/' + type + '.html?'+ getParams, filename);
     } catch (err) {
         next(err)
     }
 };
 
+// Process query params from request URL to build internal URL for Puppeteer,
+// handle missing params errors, record stickers and response with .gif
 async function processSticker(category, req, res, next) {
     var buffer;
     var text;
@@ -74,6 +77,7 @@ async function processSticker(category, req, res, next) {
         return;
     }
 
+    // Filename specify by sticker domain
     switch (type) {
         case "analogy":
             stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
@@ -96,6 +100,7 @@ async function processSticker(category, req, res, next) {
             break;
     }
     
+    // Check if sticker already exists in cache, if not, render a new sticker
     if(fs.existsSync(stickerFile)) {
         buffer = fs.readFileSync(stickerFile);
         console.log(`-- Served from ${stickerFile} cache`);
@@ -113,6 +118,8 @@ async function processSticker(category, req, res, next) {
     res.send(buffer);
 }
 
+
+// Routes for sticker endpoints
 router.get('*', function(req, res, next) {
 	next();
 });

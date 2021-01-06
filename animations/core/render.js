@@ -1,18 +1,21 @@
 // Getting the svg element from the html page to be animated
 var svg = document.querySelector("svg");
 
-var option = new URL(window.location.href).searchParams.get("option");
+// Each chartjunk sticker is different, their animation timeline is in the html file.
+if (STICKER_TYPE != 'chartjunk') {
+  var option = new URL(window.location.href).searchParams.get("option");
 
-
-// Select type of animation based on the value of the "animation" query parameter
-// options = [pulse, shake, count]
-var gsap_animation = animation_options(svg, option);
-
-if(option === "count") {
-    var repeat_mode = -1;
-}
-else if(option === "pulse" || option === "shake") {
-    var repeat_mode = 0;
+  // Select type of animation based on the value of the "animation" query parameter
+  // options = [pulse, shake, count]
+  var gsap_animation = animation_options(svg, option);
+  
+  if(option === "count") {
+      var repeat_mode = -1;
+  }
+  else if(option === "pulse" || option === "shake") {
+      var repeat_mode = 0;
+  }
+  
 }
 
 // Array containing img elements of animation frames to be render into an Gif
@@ -23,7 +26,7 @@ async function processAnimationFrames() {
   // Getting the section elements to display each frames of the animation for debugging purposes
   var list = document.querySelector("section");
 
-  var fps = 24;
+  var fps = 14;
   var duration = gsap_animation.duration();
   var frames = Math.ceil((duration / 1) * fps);
   var current = 0;
