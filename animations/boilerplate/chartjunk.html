@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../core/render_stage.css" />
+    <script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js"></script>
+    <script src="../lib/gif.js"></script>
+    <script src="//d3plus.org/js/d3.js"></script>
+    <script src="//d3plus.org/js/d3plus.js"></script>
+  </head>
+
+  <body>
+    
+    <!-- Insert SVG here -->
+
+    <section></section>
+
+    <script>
+      var svg = document.querySelector("svg");
+
+      var maskPercentage = Math.floor((new URL(
+          window.location.href
+        ).searchParams.get("value") / new URL(
+          window.location.href
+        ).searchParams.get("goal")) * 100);
+
+        tl = gsap.timeline({ paused: true });
+
+        // Modify the variable below to config the fill-mask on chartjunk sticker
+        // If the sticker fills vertically using yPercent
+        // If the sticker fills horizontally using xPercent
+        var gsap_animation = tl.to("#fill-mask", {duration:1, xPercent:maskPercentage, stagger:0.4})
+                                .to(svg, 0.8, {
+                                scaleX: 1.05,
+                                scaleY: 1.05,
+                                ease: Elastic.easeOut,
+                                repeatDelay: 0.5,
+                                repeat: 0
+                                });
+
+    </script>
+    <!-- <script src="../core/options.js"></script> -->
+    <script src="../core/textwrap.js"></script>
+    <script src="../core/render.js"></script>
+  </body>
+</html>

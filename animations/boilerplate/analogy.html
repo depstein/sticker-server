@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../core/render_stage.css" />
+    <script src="https://unpkg.com/blob-util/dist/blob-util.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js"></script>
+    <script src="../lib/gif.js"></script>
+    <script src="//d3plus.org/js/d3.js"></script>
+    <script src="//d3plus.org/js/d3plus.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Insert SVG Here -->
+
+    <section></section>
+    
+    <script>
+      // Configure analogy text rendering here
+      var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value") / 540).toFixed(1);
+      if (new URL(window.location.href).searchParams.get("unit") == "calories") {
+        document.getElementById("analogy").textContent = analogy_value + " x a burger"
+      } else {
+        document.getElementById("analogy").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+        " per calorie of a burger";
+      }
+
+    </script>
+    <script src="../lib/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
+    <script src="../core/render.js"></script>
+  </body>
+</html>
