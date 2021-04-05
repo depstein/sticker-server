@@ -192,7 +192,7 @@
         />
         <path class="cls-9" d="M170.74,98.9a71.58,71.58,0,0,1,11.76,12.38" />
         <path class="cls-9" d="M163.76,93.81q2.46,1.57,4.78,3.34" />
-        <text class="cls-10" transform="translate(108 73.57)">
+        <text id="unit" class="cls-10" transform="translate(108 73.57)">
           ~290 calories
         </text>
         <!-- <text class="cls-11" transform="translate(26.06 92.3)">
@@ -217,7 +217,7 @@
     <section></section>
 
     <script>
-      var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value").split(/ (.*)/)[0] / 150).toFixed(1);
+      var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value").split(/ (.*)/)[0] / 290).toFixed(1);
       if (new URL(window.location.href).searchParams.get("unit") == "calories") {
         document.getElementById("analogy").textContent = analogy_value + " x a slice of pizza"
       } else {

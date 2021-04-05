@@ -233,7 +233,7 @@
           .get("value") / 525
       ).toFixed(1);
       if (new URL(window.location.href).searchParams.get("unit") == "steps") {
-        document.getElementById("text").textContent = analogy_value + " x around a track"
+        document.getElementById("text").textContent = analogy_value + " x a track"
       } else {
         document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
         " per step of a track";

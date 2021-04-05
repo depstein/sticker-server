@@ -223,7 +223,7 @@
   ).toFixed(1);
 
   if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
-    document.getElementById("text").textContent = analogy_value + " x the tempo of 'Rolling in the Deep"
+    document.getElementById("text").textContent = analogy_value + " x the tempo of 'Rolling in the Deep'"
   } else {
     document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
     " per tempo of 'Rolling in the Deep'";
