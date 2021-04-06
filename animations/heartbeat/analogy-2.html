@@ -215,25 +215,30 @@
       </g>
     </svg>
 
-<script>
-  var analogy_value = parseFloat(
-    new URL(window.location.href).searchParams
-      .get("value") / 80
-  ).toFixed(1);
+    <section></section>
 
-  if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
-    document.getElementById("text").textContent = analogy_value + " x resting heart rate"
-  } else {
-    document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
-    " per resting heart rate";
-  }
+    <script>
+      var analogy_value = parseFloat(
+        new URL(window.location.href).searchParams
+          .get("value") / 80
+      ).toFixed(1);
 
-  d3plus
-    .textwrap()
-    .container(d3.select("#text"))
-    .resize(false)   
-    .draw();
-</script>
+      if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
+        document.getElementById("text").textContent = analogy_value + " x resting heart rate"
+      } else {
+        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+        " per resting heart rate";
+      }
+
+      d3plus
+        .textwrap()
+        .container(d3.select("#text"))
+        .resize(false)   
+        .draw();
+    </script>
+    <script src="../lib/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
     <script src="../core/options.js"></script>
     <script src="../core/render.js"></script>
   </body>
