@@ -114,7 +114,7 @@ async function processSticker(category, req, res, next) {
             `value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`);
     }
 
-    // res.set('Content-Type', 'image/gif');
+    res.set('Content-Type', 'image/gif');
     res.send(buffer);
 }
 
