@@ -31,7 +31,7 @@ app.use('/', indexRouter);
 // page for sticker sharing
 app.use('/sticker', function(req, res, next) {
   var stickerLink = String(req.originalUrl).substring(17);
-  res.send("<html><head><meta content=\"Snapchat\" property=\"og:site_name\" /><meta content=\"Share your sticker!\" property=\"og:title\" /><meta content=\"" + stickerLink + "\" property=\"snapchat:sticker\" /></head><img src=\"" + stickerLink + "\"></html>");
+  res.send("<html><head><meta content=\"Snapchat\" property=\"og:site_name\" /><meta content=\"Share your sticker!\" property=\"og:title\" /><meta content=\"" + stickerLink + "\" property=\"snapchat:sticker\" /></head><body><img src=\"" + stickerLink + "\"></body></html>");
 });
 
 // catch 404 and forward to error handler
