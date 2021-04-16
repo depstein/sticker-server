@@ -164,8 +164,7 @@ router.get('/sticker/:link', function(req, res, next) {
   const goal = req.query.goal ? req.query.goal : req.query.value; // required only for chartjunk endpoint* int[1...]
                                                                 // default to value param, if empty
   const time = req.query.time ? req.query.time : "false";
-
-  var stickerLink = 'http://' + req.headers.host + '/' + req.params.link + '/?' + `type=${type}&variation=${variation}&value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`;
+  var stickerLink = req.protocol + '://' + req.headers.host + '/' + req.params.link + '/?' + `type=${type}&variation=${variation}&value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`;
   console.log(stickerLink);
   res.set('Content-Type', 'text/html');
   res.send("<html><head><meta content=\"Snapchat\" property=\"og:site_name\" /><meta content=\"Share your sticker!\" property=\"og:title\" /><meta content=\"" + stickerLink + "\" property=\"snapchat:sticker\" /></head><body><img src=\"" + stickerLink + "\"></body></html>");
