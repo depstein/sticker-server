@@ -156,12 +156,27 @@
     <section></section>
 
     <script>
-      var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value").split(/ (.*)/)[0] / 150).toFixed(1);
-      if (new URL(window.location.href).searchParams.get("unit") == "calories") {
-        document.getElementById("analogy").textContent = analogy_value + " x a chocolate chip cookie"
+      var totalNutrients = {"calories": 150, "g fiber": 1, "g carbs": 20, "g sodium": 90, "g sugar": 10};
+      var denominatorRoot = "a chocolate chip cookie";
+      var denominatorDescriptor;
+      var unit = new URL(window.location.href).searchParams.get("unit");
+      var value = new URL(window.location.href).searchParams.get("value");
+      if(unit in totalNutrients) {
+      denominatorValue = totalNutrients[unit];
+      denominatorDescriptor = ' x ' + denominatorRoot;
+    } else {
+      denominatorValue = totalNutrients['calories'];
+      denominatorDescriptor = " " + unit + ' per calorie of ' + denominatorRoot;
+    }
+      var analogy_value = (value/denominatorValue).toFixed(1) + " " + unit;
+      var sel = document.querySelector('#analogy');
+      sel.textContent = (value/denominatorValue).toFixed(1)  + denominatorDescriptor;
+
+      var unitSel = document.querySelector('#unit');
+      if(unit in totalNutrients) {
+        unitSel.textContent = "~" + denominatorValue + " " + options['unit'];
       } else {
-        document.getElementById("analogy").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
-        " per calorie of a chocolate chip cookie";
+        unitSel.textContent = "~" + denominatorValue + " calories";
       }
 
     </script>

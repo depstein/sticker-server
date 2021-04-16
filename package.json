@@ -16,7 +16,6 @@
     "puppeteer": "^1.20.0",
     "then-request": "^6.0.2"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "nodemon ./bin/www"
   },

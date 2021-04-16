@@ -37,6 +37,8 @@ async function recordSticker (next, server, category, filename, type, getParams)
 // Process query params from request URL to build internal URL for Puppeteer,
 // handle missing params errors, record stickers and response with .gif
 async function processSticker(category, req, res, next) {
+    var startTime = new Date();
+
     var buffer;
     var text;
     var stickerFile;
@@ -80,22 +82,22 @@ async function processSticker(category, req, res, next) {
     // Filename specify by sticker domain
     switch (type) {
         case "analogy":
-            stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
+            stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
             break;
         case "chartjunk":
             if (category === "generic") {
-                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}_${time}.gif`
+                stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}_${time}.gif`
             } 
             else {
-                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${time}.gif`
+                stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${time}.gif`
             }
             break;
         case "plain":
             if (category === "generic") {
-                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${color}_${time}.gif`
+                stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${color}_${time}.gif`
             }
             else {
-                stickerFile = `${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
+                stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
             }
             break;
     }
@@ -113,6 +115,8 @@ async function processSticker(category, req, res, next) {
             `${type}-${variation}`, 
             `value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`);
     }
+
+    console.log("Rendered in "+ (new Date() - startTime) + " ms");
 
     res.set('Content-Type', 'image/gif');
     res.send(buffer);
@@ -146,6 +150,14 @@ router.get('/music', async function(req, res, next) {
 
 router.get('/generic', async function(req, res, next) {
     processSticker('generic', req, res, next);
+});
+
+// page for sticker sharing
+router.get('/sticker', function(req, res, next) {
+  var stickerLink = req.query.sticker;
+  console.log(stickerLink);
+  res.set('Content-Type', 'text/html');
+  res.send("<html><head><meta content=\"Snapchat\" property=\"og:site_name\" /><meta content=\"Share your sticker!\" property=\"og:title\" /><meta content=\"" + stickerLink + "\" property=\"snapchat:sticker\" /></head><body><img src=\"" + stickerLink + "\"></body></html>");
 });
 
 module.exports = router;

@@ -118,7 +118,9 @@
         window.location.href
       ).searchParams.get("goal"));
       
-      var gsap_animation = 
+      var option = new URL(window.location.href).searchParams.get("option");
+      if(option === "fill") {
+        var gsap_animation = 
           tl.to("#fill-mask", {duration:1.5, rotation:maskPercentage, transformOrigin: "top center", stagger:0.4})
           .to("#meter", {duration:1.5, rotation:maskPercentage, transformOrigin: "right center", stagger:0.4}, 0)
                             .to(svg, 0.8, {
@@ -128,12 +130,17 @@
                             repeatDelay: 0.5,
                             repeat: 0
                             });
-
+      } else {
+        //TODO: the fill mask doesn't seem to copy over, but mostly working seems close enough :-)
+        tl.to("#fill-mask", {duration:0, rotation:maskPercentage, transformOrigin: "top center"}).play();
+        tl.to("#meter", {duration:0, rotation:maskPercentage, transformOrigin: "right center"}).play();
+      }
                 
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>
     <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
     <script src="../core/render.js"></script>
   </body>
 </html>

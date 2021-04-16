@@ -149,8 +149,9 @@
         window.location.href
       ).searchParams.get("goal")) * -100);
 
-      
-      var gsap_animation = tl.to("#fill-mask", {duration:1, yPercent:maskPercentage, stagger:0.4})
+      var option = new URL(window.location.href).searchParams.get("option");
+      if(option === "fill") {
+        var gsap_animation = tl.to("#fill-mask", {duration:0, yPercent:0}).to("#fill-mask", {duration:1, yPercent:maskPercentage, stagger:0.4})
           .to(svg, 0.8, {
           scaleX: 1.05,
           scaleY: 1.05,
@@ -158,10 +159,14 @@
           repeatDelay: 0.5,
           repeat: 0
           });
+      } else {
+        document.getElementById("fill-mask").setAttribute("height", -document.getElementById("fill-mask").getAttribute('height')*maskPercentage/100);
+      }
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>
     <script src="../core/textwrap.js"></script>
+    <script src="../core/options.js"></script>
     <script src="../core/render.js"></script>
   </body>
 </html>

@@ -217,18 +217,33 @@
     <section></section>
 
     <script>
-      var analogy_value = parseFloat(new URL(window.location.href).searchParams.get("value").split(/ (.*)/)[0] / 290).toFixed(1);
-      if (new URL(window.location.href).searchParams.get("unit") == "calories") {
-        document.getElementById("analogy").textContent = analogy_value + " x a slice of pizza"
+      var totalNutrients = {"calories": 290, "g fiber": 3, "g carbs": 40, "g sodium": 640, "g sugar": 4};
+      var denominatorRoot = "a slice of pizza";
+      var denominatorDescriptor;
+      var unit = new URL(window.location.href).searchParams.get("unit");
+      var value = new URL(window.location.href).searchParams.get("value");
+      if(unit in totalNutrients) {
+      denominatorValue = totalNutrients[unit];
+      denominatorDescriptor = ' x ' + denominatorRoot;
+    } else {
+      denominatorValue = totalNutrients['calories'];
+      denominatorDescriptor = " " + unit + ' per calorie of ' + denominatorRoot;
+    }
+      var analogy_value = (value/denominatorValue).toFixed(1) + " " + unit;
+      var sel = document.querySelector('#analogy');
+      sel.textContent = (value/denominatorValue).toFixed(1)  + denominatorDescriptor;
+
+      var unitSel = document.querySelector('#unit');
+      if(unit in totalNutrients) {
+        unitSel.textContent = "~" + denominatorValue + " " + options['unit'];
       } else {
-        document.getElementById("analogy").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
-        " per calorie of a slice of pizza";
+        unitSel.textContent = "~" + denominatorValue + " calories";
       }
 
     </script>
-        <script src="../lib/moment.js"></script>
-        <script src="../core/timeparser.js"></script>
-        <script src="../core/textwrap.js"></script>
+    <script src="../lib/moment.js"></script>
+    <script src="../core/timeparser.js"></script>
+    <script src="../core/textwrap.js"></script>
     <script src="../core/options.js"></script>
     <script src="../core/render.js"></script>
   </body>

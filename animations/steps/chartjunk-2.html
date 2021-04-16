@@ -225,21 +225,26 @@
   
         tl = gsap.timeline({ paused: true });
   
-        var gsap_animation = tl
-          .to("#fill-mask", {
-            duration: 1,
-            xPercent: maskPercentage,
-            stagger: 0.4,
-          })
-          .to(svg, 0.8, {
-            scaleX: 1.05,
-            scaleY: 1.05,
-            ease: Elastic.easeOut,
-            repeatDelay: 0.5,
-            repeat: 0,
-          });
+        var option = new URL(window.location.href).searchParams.get("option");
+        if(option === "fill") {
+            var gsap_animation = tl
+              .to("#fill-mask", {
+                duration: 1,
+                xPercent: maskPercentage,
+                stagger: 0.4,
+              })
+              .to(svg, 0.8, {
+                scaleX: 1.05,
+                scaleY: 1.05,
+                ease: Elastic.easeOut,
+                repeatDelay: 0.5,
+                repeat: 0,
+              });
+        } else {
+            document.getElementById("fill-mask").setAttribute("x", 1.0*document.getElementById("fill-mask").getAttribute('x') + document.getElementById("fill-mask").getAttribute('width')*maskPercentage/100);
+        }
       </script>
-      <!-- <script src="../core/options.js"></script> -->
+      <script src="../core/options.js"></script>
       <script src="../core/textwrap.js"></script>
       <script src="../core/render.js"></script>
   </body>

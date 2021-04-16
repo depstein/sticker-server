@@ -1,6 +1,6 @@
 
 function animation_options(svg, param) {
-    // var Cont={val:0} , NewVal = value ;
+    var Cont={val:0} , NewVal = VALUE;
 
     switch (param) {
       case "pulse":
@@ -20,13 +20,14 @@ function animation_options(svg, param) {
             ease: Elastic.easeOut.config(2, 0.2) 
       });
 
-      // case "count":
-      //   return TweenLite.to(Cont , 1, {
-      //       val: NewVal, 
-      //       roundProps: "val", 
-      //       onUpdate: function(){
-      //           document.getElementById("value").innerHTML= Cont.val
-      //       }
-      //   });
+      case "count":
+        return TweenLite.to(Cont , 1, {
+            val: NewVal, 
+            roundProps: "val", 
+            onUpdate: function(){
+                VALUE= Cont.val
+                wrapText();
+            }
+        });
     }
   };

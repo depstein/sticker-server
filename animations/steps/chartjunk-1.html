@@ -166,6 +166,8 @@
   
         tl = gsap.timeline({ paused: true });
   
+        var option = new URL(window.location.href).searchParams.get("option");
+        if(option === "fill") {
         var gsap_animation = tl
           .to("#fill-mask", {
             duration: 1,
@@ -179,8 +181,11 @@
             repeatDelay: 0.5,
             repeat: 0,
           });
+        } else {
+            document.getElementById("fill-mask").setAttribute("y", document.getElementById("fill-mask").getAttribute('y') - document.getElementById("fill-mask").getAttribute('height')*maskPercentage/100);
+        }
       </script>
-      <!-- <script src="../core/options.js"></script> -->
+      <script src="../core/options.js"></script>
       <script src="../core/textwrap.js"></script>
       <script src="../core/render.js"></script>
   </body>

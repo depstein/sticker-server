@@ -1,15 +1,15 @@
 // Getting the svg element from the html page to be animated
 var svg = document.querySelector("svg");
 
-// Each chartjunk sticker is different, their animation timeline is in the html file.
-if (STICKER_TYPE != 'chartjunk') {
+// Each chartjunk sticker has a different fill animation, their animation timeline is in the html file.
+if (STICKER_TYPE != 'chartjunk' || option != "fill") {
   var option = new URL(window.location.href).searchParams.get("option");
 
   // Select type of animation based on the value of the "animation" query parameter
   // options = [pulse, shake, count]
   var gsap_animation = animation_options(svg, option);
   
-  if(option === "count") {
+  if(option === "count" || option === "fill") {
       var repeat_mode = -1;
   }
   else if(option === "pulse" || option === "shake") {

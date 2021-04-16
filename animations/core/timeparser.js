@@ -13,7 +13,7 @@ function processDefaultTimeText(ms) {
     var topTwoUnits = [];
     var finalValue = "";
 
-    for (i = 0; i < orderOfDuration.length; i++) {
+    for (var i = 0; i < orderOfDuration.length; i++) {
     if (parseDuration["_data"][orderOfDuration[i]] !== 0){
         var unit = ((parseDuration["_data"][orderOfDuration[i]] > 1) ? durationAbbr[orderOfDuration[i]] + "s" : durationAbbr[orderOfDuration[i]]);
         topTwoUnits.push([unit, parseDuration["_data"][orderOfDuration[i]]])
@@ -23,10 +23,12 @@ function processDefaultTimeText(ms) {
     }
     } 
     if (topTwoUnits.length > 1) {
-    finalValue = topTwoUnits[0][1] + " " + topTwoUnits[0][0] + ", " + topTwoUnits[1][1] + " " + topTwoUnits[1][0];
+      finalValue = Math.floor(topTwoUnits[0][1]) + " " + topTwoUnits[0][0] + ", " + Math.floor(topTwoUnits[1][1]) + " " + topTwoUnits[1][0];
     }
-    else {
-    finalValue = topTwoUnits[0][1] + " " + topTwoUnits[0][0];
+    else if(topTwoUnits.length > 0) {
+      finalValue = Math.floor(topTwoUnits[0][1]) + " " + topTwoUnits[0][0];
+    } else {
+      finalValue = "0 sec";
     }
     
     return finalValue;
