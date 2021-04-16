@@ -154,7 +154,7 @@ router.get('/generic', async function(req, res, next) {
 
 // page for sticker sharing
 router.get('/sticker', function(req, res, next) {
-  var stickerLink = req.query.sticker;
+  var stickerLink = String(req.originalUrl).substring(17);
   console.log(stickerLink);
   res.set('Content-Type', 'text/html');
   res.send("<html><head><meta content=\"Snapchat\" property=\"og:site_name\" /><meta content=\"Share your sticker!\" property=\"og:title\" /><meta content=\"" + stickerLink + "\" property=\"snapchat:sticker\" /></head><body><img src=\"" + stickerLink + "\"></body></html>");
