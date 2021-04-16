@@ -125,7 +125,7 @@ router.get('*', function(req, res, next) {
 });
 
 router.get('/heartbeat', async function(req, res, next) {
-    processSticker('heartbeat', req, res, next);   
+    processSticker('heartbeat', req, res, next);
 });
 
 router.get('/steps', async function(req, res, next) {
