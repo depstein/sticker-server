@@ -155,8 +155,6 @@ router.get('/generic', async function(req, res, next) {
 // page for sticker sharing
 router.get('/sticker/:link', function(req, res, next) {
 
-  console.log('variables: ' + `type=${type}, variation=${variation}, value=${value}, unit=${unit}, option=${option}, color=${color}, goal=${goal}, time=${time}`);
-
   const type = req.query.type;                                    // ["plain", "chartjunk", "analogy"]
   const variation = req.query.variation;                          // [1, 2, 3, ...]
   const value = req.query.value;                                  // int[1...]
@@ -168,6 +166,7 @@ router.get('/sticker/:link', function(req, res, next) {
   const time = req.query.time ? req.query.time : "false";
   var stickerLink = req.protocol + '://' + req.headers.host + '/' + req.params.link + '/?' + `type=${type}&variation=${variation}&value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`;
   console.log("stickerLink: " + stickerLink);
+  console.log('variables: ' + `type=${type}, variation=${variation}, value=${value}, unit=${unit}, option=${option}, color=${color}, goal=${goal}, time=${time}`);
   res.set('Content-Type', 'text/html');
   res.send("<html><head><meta content=\"Snapchat\" property=\"og:site_name\" /><meta content=\"Share your sticker!\" property=\"og:title\" /><meta content=\"" + stickerLink + "\" property=\"snapchat:sticker\" /></head><body><img src=\"" + stickerLink + "\"></body></html>");
 });
