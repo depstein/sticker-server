@@ -43,15 +43,15 @@ async function processSticker(category, req, res, next) {
     var text;
     var stickerFile;
 
-    const type = req.query.type;                                    // ["plain", "chartjunk", "analogy"]
-    const variation = req.query.variation;                          // [1, 2, 3, ...]
-    const value = req.query.value;                                  // int[1...]
-    const unit = req.query.unit;                                    // string
-    const option = req.query.option;                                // ["shake", "pulse"]
-    const color = req.query.color ? req.query.color : "green";      // required only for generic (plain, chartjunk) endpoint* ["purple", "gold", "red", "green", "blue"] 
-    const goal = req.query.goal ? req.query.goal : req.query.value; // required only for chartjunk endpoint* int[1...]
-                                                                    // default to value param, if empty
-    const time = req.query.time ? req.query.time : "false";
+    const type = String(req.query.type).split(',')[0];                                    // ["plain", "chartjunk", "analogy"]
+    const variation = String(req.query.variation).split(',')[0];                          // [1, 2, 3, ...]
+    const value = String(req.query.value).split(',')[0];                                  // int[1...]
+    const unit = String(req.query.unit).split(',')[0];                                    // string
+    const option = String(req.query.option).split(',')[0];                                // ["shake", "pulse"]
+    const color = req.query.color ? String(req.query.color).split(',')[0] : "green";      // required only for generic (plain, chartjunk) endpoint* ["purple", "gold", "red", "green", "blue"] 
+    const goal = req.query.goal ? String(req.query.goal).split(',')[0] : String(req.query.value).split(',')[0]; // required only for chartjunk endpoint* int[1...]
+                                                                // default to value param, if empty
+    const time = req.query.time ? String(req.query.time).split(',')[0] : "false";
 
     // error handling
     if (type === undefined) {
