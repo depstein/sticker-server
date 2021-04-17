@@ -155,18 +155,18 @@ router.get('/generic', async function(req, res, next) {
 // page for sticker sharing
 router.get('/sticker/:link', async function(req, res, next) {
 
-  const stickertype = req.query.type;                                    // ["plain", "chartjunk", "analogy"]
-  const stickervariation = req.query.variation;                          // [1, 2, 3, ...]
-  const stickervalue = req.query.value;                                  // int[1...]
-  const stickerunit = req.query.unit;                                    // string
-  const stickeroption = req.query.option;                                // ["shake", "pulse"]
-  const stickercolor = req.query.color ? req.query.color : "green";      // required only for generic (plain, chartjunk) endpoint* ["purple", "gold", "red", "green", "blue"] 
-  const stickergoal = req.query.goal ? req.query.goal : req.query.value; // required only for chartjunk endpoint* int[1...]
+  const type = req.query.type;                                    // ["plain", "chartjunk", "analogy"]
+  const variation = req.query.variation;                          // [1, 2, 3, ...]
+  const value = req.query.value;                                  // int[1...]
+  const unit = req.query.unit;                                    // string
+  const option = req.query.option;                                // ["shake", "pulse"]
+  const color = req.query.color ? req.query.color : "green";      // required only for generic (plain, chartjunk) endpoint* ["purple", "gold", "red", "green", "blue"] 
+  const goal = req.query.goal ? req.query.goal : req.query.value; // required only for chartjunk endpoint* int[1...]
                                                                 // default to value param, if empty
-  const stickertime = req.query.time ? req.query.time : "false";
-  var stickerLink = req.protocol + '://' + req.headers.host + '/' + req.params.link + '/?' + `type=${stickertype}&variation=${stickervariation}&value=${stickervalue}&unit=${stickerunit}&option=${stickeroption}&color=${stickercolor}&goal=${stickergoal}&time=${stickertime}`;
+  const time = req.query.time ? req.query.time : "false";
+  var stickerLink = req.protocol + '://' + req.headers.host + '/' + req.params.link + '/?' + `type=${type}&variation=${variation}&value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`;
   console.log("stickerLink: " + stickerLink);
-  console.log('variables: ' + `type=${stickertype}, variation=${stickervariation}, value=${stickervalue}, unit=${stickerunit}, option=${stickeroption}, color=${stickercolor}, goal=${stickergoal}, time=${stickertime}`);
+  console.log('variables: ' + `type=${type}, variation=${variation}, value=${value}, unit=${unit}, option=${option}, color=${color}, goal=${goal}, time=${time}`);
   res.set('Content-Type', 'text/html');
   res.send("<html><head><meta content=\"Snapchat\" property=\"og:site_name\" /><meta content=\"Share your sticker!\" property=\"og:title\" /><meta content=\"" + stickerLink + "\" property=\"snapchat:sticker\" /></head><body><img src=\"" + stickerLink + "\"></body></html>");
 });
