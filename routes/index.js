@@ -164,9 +164,9 @@ router.get('/sticker/:link', async function(req, res, next) {
   const goal = req.query.goal ? req.query.goal : req.query.value; // required only for chartjunk endpoint* int[1...]
                                                                 // default to value param, if empty
   const time = req.query.time ? req.query.time : "false";
-  var stickerLink = req.protocol + '://' + req.headers.host + '/' + req.params.link + '/?' + `type=${type}&variation=${variation}&value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`;
+  var stickerLink = req.protocol + '://' + req.headers.host + '/' + req.params.link + '/?' + `type=${type.split(',')[0]}&variation=${variation.split(',')[0]}&value=${value.split(',')[0]}&unit=${unit.split(',')[0]}&option=${option.split(',')[0]}&color=${color.split(',')[0]}&goal=${goal.split(',')[0]}&time=${time.split(',')[0]}`;
   console.log("stickerLink: " + stickerLink);
-  console.log('variables: ' + `type=${type}, variation=${variation}, value=${value}, unit=${unit}, option=${option}, color=${color}, goal=${goal}, time=${time}`);
+  console.log('variables: ' + `type=${type.split(',')[0]}, variation=${variation.split(',')[0]}, value=${value.split(',')[0]}, unit=${unit.split(',')[0]}, option=${option.split(',')[0]}, color=${color.split(',')[0]}, goal=${goal.split(',')[0]}, time=${time.split(',')[0]}`);
   res.set('Content-Type', 'text/html');
   res.send("<html><head><meta content=\"Snapchat\" property=\"og:site_name\" /><meta content=\"Share your sticker!\" property=\"og:title\" /><meta content=\"" + stickerLink + "\" property=\"snapchat:sticker\" /></head><body><img src=\"" + stickerLink + "\"></body></html>");
 });
