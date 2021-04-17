@@ -153,7 +153,7 @@ router.get('/generic', async function(req, res, next) {
 });
 
 // page for sticker sharing
-router.get('/sticker/:link', function(req, res, next) {
+router.get('/sticker/:link', async function(req, res, next) {
 
   const type = req.query.type;                                    // ["plain", "chartjunk", "analogy"]
   const variation = req.query.variation;                          // [1, 2, 3, ...]
