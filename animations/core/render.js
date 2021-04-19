@@ -9,13 +9,6 @@ if (STICKER_TYPE != 'chartjunk' || option != "fill") {
   // options = [pulse, shake, count]
   var gsap_animation = animation_options(svg, option);
   
-  if(option === "count" || option === "fill") {
-      var repeat_mode = -1;
-  }
-  else if(option === "pulse" || option === "shake") {
-      var repeat_mode = 0;
-  }
-  
 }
 
 // Array containing img elements of animation frames to be render into an Gif
@@ -71,12 +64,16 @@ function renderGif() {
     quality: 10,
     transparent: "rgba(0,0,0,0)",
     debug: true,
-    repeat: repeat_mode
+    repeat: 0
   });
 
   // Iterate through renderedFrames to add into the Gif
   for (var i in renderedFrames) {
     gif.addFrame(renderedFrames[i], { delay: 100 });
+  }
+  //If it's supposed to count up, add a 1-second delay to the end
+  if(option === "count" || option === "fill") {
+    gif.addFrame(renderedFrames[renderedFrames.length - 1], {copy:true, delay:1000});
   }
 
   gif.render();
