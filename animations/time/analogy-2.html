@@ -104,7 +104,8 @@
             ~1 hour,
             <tspan x="0" y="14">30 mins</tspan>
           </text>
-          <text class="cls-5" transform="translate(28.79 84.56)">
+          <rect fill="none" x="30" y="35" width="90" height="95"></rect>
+          <text class="cls-5" transform="translate(28.79 84.56)" id="text">
             <tspan id="value"></tspan>
             <tspan id="unit" x="0" y="20"></tspan>
           </text>
@@ -225,7 +226,7 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("addiValue")
+          .get("value")
           .split(/ (.*)/)[0] / 5400000
       ).toFixed(1);
       document.getElementById("analogy_text").textContent =

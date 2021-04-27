@@ -96,9 +96,10 @@
           <tspan id="analogy_text"></tspan>
           <tspan x="0" y="16">NFL game</tspan>
         </text>
-        <text class="cls-3" transform="translate(23.06 94.6)">
-          <tspan id="value"></tspan>
-          <tspan id="unit" x="0" y="18.13"></tspan>
+        <rect fill="none" x="25" y="45" width="65" height="95"></rect>
+        <text class="cls-3" transform="translate(23.06 94.6)" id="text">
+          <!-- <tspan id="value"></tspan> -->
+          <!-- <tspan id="unit" x="0" y="18.13"></tspan> -->
         </text>
         <path
           class="cls-4"
@@ -148,7 +149,7 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("addiValue")
+          .get("value")
           .split(/ (.*)/)[0] / 11520000
       ).toFixed(1);
       document.getElementById("analogy_text").textContent =

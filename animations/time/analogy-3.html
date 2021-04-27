@@ -87,7 +87,8 @@
       </defs>
       <g class="cls-1">
         <g id="sticker">
-          <text class="cls-2" transform="translate(22.79 80.06)">
+          <rect fill="none" x="25" y="50" width="90" height="55"></rect>
+          <text class="cls-2" transform="translate(22.79 80.06)" id="text">
             <tspan id="value"></tspan>
             <tspan id="unit" x="0" y="20"></tspan>
           </text>
@@ -245,7 +246,7 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("addiValue")
+          .get("value")
           .split(/ (.*)/)[0] / 7260000
       ).toFixed(1);
       document.getElementById("analogy_text").textContent =
