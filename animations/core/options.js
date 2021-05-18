@@ -29,5 +29,10 @@ function animation_options(svg, param) {
                 wrapText();
             }
         });
+      case "none":
+        return TweenMax.to(svg, 1, {
+          scaleX: 1,
+          scaleY: 1
+        });
     }
   };

@@ -9,15 +9,6 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-app.use(function(req, res, next){
-  res.setTimeout(60000, function(){
-      console.log('Request has timed out.');
-          res.send(408);
-      });
-
-  next();
-});
-
 // enabling CORS 
 app.use(cors())
 
