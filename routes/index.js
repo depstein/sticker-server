@@ -37,89 +37,93 @@ async function recordSticker (next, server, category, filename, type, getParams)
 // Process query params from request URL to build internal URL for Puppeteer,
 // handle missing params errors, record stickers and response with .gif
 async function processSticker(category, req, res, next) {
-    var startTime = new Date();
+    try {
+        var startTime = new Date();
 
-    var buffer;
-    var text;
-    var stickerFile;
+        var buffer;
+        var text;
+        var stickerFile;
 
-    const type = String(req.query.type).split(',')[0];                                    // ["plain", "chartjunk", "analogy"]
-    const variation = String(req.query.variation).split(',')[0];                          // [1, 2, 3, ...]
-    const value = String(req.query.value).split(',')[0];                                  // int[1...]
-    const unit = String(req.query.unit).split(',')[0];                                    // string
-    const option = String(req.query.option).split(',')[0];                                // ["shake", "pulse"]
-    const color = req.query.color ? String(req.query.color).split(',')[0] : "green";      // required only for generic (plain, chartjunk) endpoint* ["purple", "gold", "red", "green", "blue"] 
-    const goal = req.query.goal ? String(req.query.goal).split(',')[0] : String(req.query.value).split(',')[0]; // required only for chartjunk endpoint* int[1...]
-                                                                // default to value param, if empty
-    const time = req.query.time ? String(req.query.time).split(',')[0] : "false";
+        const type = String(req.query.type).split(',')[0];                                    // ["plain", "chartjunk", "analogy"]
+        const variation = String(req.query.variation).split(',')[0];                          // [1, 2, 3, ...]
+        const value = String(req.query.value).split(',')[0];                                  // int[1...]
+        const unit = String(req.query.unit).split(',')[0];                                    // string
+        const option = String(req.query.option).split(',')[0];                                // ["shake", "pulse"]
+        const color = req.query.color ? String(req.query.color).split(',')[0] : "green";      // required only for generic (plain, chartjunk) endpoint* ["purple", "gold", "red", "green", "blue"] 
+        const goal = req.query.goal ? String(req.query.goal).split(',')[0] : String(req.query.value).split(',')[0]; // required only for chartjunk endpoint* int[1...]
+                                                                    // default to value param, if empty
+        const time = req.query.time ? String(req.query.time).split(',')[0] : "false";
 
-    // error handling
-    if (type === undefined) {
-        res.status(400).send("Missing \`type\` query parameter");
-        return;
-    }
+        // error handling
+        if (type === undefined) {
+            res.status(400).send("Missing \`type\` query parameter");
+            return;
+        }
 
-    if (variation === undefined) {
-        res.status(400).send("Missing \`variation\` query parameter");
-        return;
-    }
+        if (variation === undefined) {
+            res.status(400).send("Missing \`variation\` query parameter");
+            return;
+        }
 
-    if (value === undefined) {
-        res.status(400).send("Missing \`value\` query parameter");
-        return;
-    }
+        if (value === undefined) {
+            res.status(400).send("Missing \`value\` query parameter");
+            return;
+        }
 
-    if (unit === undefined) {
-        res.status(400).send("Missing \`unit\` query parameter");
-        return;
-    }
+        if (unit === undefined) {
+            res.status(400).send("Missing \`unit\` query parameter");
+            return;
+        }
 
-    if (option === undefined) {
-        res.status(400).send("Missing \`option\` query parameter");
-        return;
-    }
+        if (option === undefined) {
+            res.status(400).send("Missing \`option\` query parameter");
+            return;
+        }
 
-    // Filename specify by sticker domain
-    switch (type) {
-        case "analogy":
-            stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
-            break;
-        case "chartjunk":
-            if (category === "generic") {
-                stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}_${time}.gif`
-            } 
-            else {
-                stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${time}.gif`
-            }
-            break;
-        case "plain":
-            if (category === "generic") {
-                stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${color}_${time}.gif`
-            }
-            else {
+        // Filename specify by sticker domain
+        switch (type) {
+            case "analogy":
                 stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
-            }
-            break;
-    }
-    
-    // Check if sticker already exists in cache, if not, render a new sticker
-    if(fs.existsSync(stickerFile)) {
-        buffer = fs.readFileSync(stickerFile);
-        console.log(`-- Served from ${stickerFile} cache`);
-    } else {
-        buffer = await recordSticker(
-            next, 
-            req.headers.host, 
-            category, 
-            stickerFile, 
-            `${type}-${variation}`, 
-            `value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`);
-    }
+                break;
+            case "chartjunk":
+                if (category === "generic") {
+                    stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${color}_${time}.gif`
+                } 
+                else {
+                    stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${goal}_${time}.gif`
+                }
+                break;
+            case "plain":
+                if (category === "generic") {
+                    stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${color}_${time}.gif`
+                }
+                else {
+                    stickerFile = `stickers/${category}_${type}-${variation}_${value}_${unit}_${option}_${time}.gif`
+                }
+                break;
+        }
+        
+        // Check if sticker already exists in cache, if not, render a new sticker
+        if(fs.existsSync(stickerFile)) {
+            buffer = fs.readFileSync(stickerFile);
+            console.log(`-- Served from ${stickerFile} cache`);
+        } else {
+            buffer = await recordSticker(
+                next, 
+                req.headers.host, 
+                category, 
+                stickerFile, 
+                `${type}-${variation}`, 
+                `value=${value}&unit=${unit}&option=${option}&color=${color}&goal=${goal}&time=${time}`);
+        }
 
-    console.log("Rendered in "+ (new Date() - startTime) + " ms");
+        console.log("Rendered in "+ (new Date() - startTime) + " ms");
 
-    res.set('Content-Type', 'image/gif');
-    res.send(buffer);
+        res.set('Content-Type', 'image/gif');
+        res.send(buffer);
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 

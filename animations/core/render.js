@@ -16,41 +16,45 @@ var renderedFrames = [];
 
 // Extract frames from the GSAP animation
 async function processAnimationFrames() {
-  // Getting the section elements to display each frames of the animation for debugging purposes
-  var list = document.querySelector("section");
+  try {
+    // Getting the section elements to display each frames of the animation for debugging purposes
+    var list = document.querySelector("section");
 
-  var fps = 14;
-  var duration = gsap_animation.duration();
-  var frames = Math.ceil((duration / 1) * fps);
-  var current = 0;
-  var framesLoaded = 0; // Semaphore to call renderGif() when all frames are fully loaded
+    var fps = 14;
+    var duration = gsap_animation.duration();
+    var frames = Math.ceil((duration / 1) * fps);
+    var current = 0;
+    var framesLoaded = 0; // Semaphore to call renderGif() when all frames are fully loaded
 
-  // Extract frames in the duration of the animation
-  while (current <= frames) {
-    gsap_animation.progress(current++ / frames);
+    // Extract frames in the duration of the animation
+    while (current <= frames) {
+      gsap_animation.progress(current++ / frames);
 
-    // Output each extracted frame into SVG blob
-    var xml = new XMLSerializer().serializeToString(svg);
-    var blob = new Blob([xml], { type: "image/svg+xml" });
-    var img = new Image();
+      // Output each extracted frame into SVG blob
+      var xml = new XMLSerializer().serializeToString(svg);
+      var blob = new Blob([xml], { type: "image/svg+xml" });
+      var img = new Image();
 
-    img.crossOrigin = "Anonymous";
-    img.onload = function() {
-      // Append each frame into the <section> on the html page for debugging purposes
-      // TODO: Disable when deployed for production
-      list.appendChild(this);
-      framesLoaded++;
+      img.crossOrigin = "Anonymous";
+      img.onload = function() {
+        // Append each frame into the <section> on the html page for debugging purposes
+        // TODO: Disable when deployed for production
+        list.appendChild(this);
+        framesLoaded++;
 
-      // Start rendering gif when all frames are fully loaded
-      if (framesLoaded === frames) {
-        renderGif();
-      }
-    };
+        // Start rendering gif when all frames are fully loaded
+        if (framesLoaded === frames) {
+          renderGif();
+        }
+      };
 
-    // Each extract frame gets output an img element with the SVG blob as the source
-    // Gif.js accepts img elements for Gif rendering
-    img.src = URL.createObjectURL(blob);
-    renderedFrames.push(img);
+      // Each extract frame gets output an img element with the SVG blob as the source
+      // Gif.js accepts img elements for Gif rendering
+      img.src = URL.createObjectURL(blob);
+      renderedFrames.push(img);
+    }
+  } catch (e) {
+    console.error(e);
   }
 }
 
