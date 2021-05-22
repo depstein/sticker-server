@@ -8,12 +8,18 @@ function animation_options(svg, param) {
           scaleX: 1.05,
           scaleY: 1.15,
           ease: Elastic.easeOut,
-          repeatDelay: 0.1
+          repeatDelay: 0.1,
+          onUpdate: function(){
+            wrapText();
+          }
         });
 
       case "shake":
         return TweenLite.fromTo(svg, 1,{ 
-            rotation: -10 
+            rotation: -10,
+            onUpdate: function(){
+              wrapText();
+            }
           },
           { 
             rotation: 0, 
@@ -25,14 +31,17 @@ function animation_options(svg, param) {
             val: NewVal, 
             roundProps: "val", 
             onUpdate: function(){
-                VALUE= Cont.val
+                VALUE= Cont.val;
                 wrapText();
             }
         });
       case "none":
         return TweenMax.to(svg, 1, {
           scaleX: 1,
-          scaleY: 1
+          scaleY: 1,
+          onUpdate: function(){
+            wrapText();
+          }
         });
     }
   };

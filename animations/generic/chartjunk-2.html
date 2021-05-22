@@ -154,15 +154,16 @@
       var svg = document.querySelector("svg");
       tl = gsap.timeline({ paused: true });
 
-      var maskPercentage = Math.floor((new URL(
+      var maskPercentage = Math.min(100, Math.floor(new URL(
         window.location.href
-      ).searchParams.get("value") / new URL(
+      ).searchParams.get("value")/new URL(
         window.location.href
-      ).searchParams.get("goal")) * -100);
+      ).searchParams.get("goal")*100))
+      console.log(maskPercentage);
 
       var option = new URL(window.location.href).searchParams.get("option");
       if(option === "fill") {
-        var gsap_animation = tl.to("#fill-mask", {duration:1, yPercent:maskPercentage, stagger:0.4})
+        var gsap_animation = tl.to("#fill-mask", {duration:1, yPercent:-maskPercentage, stagger:0.4})
           .to(svg, 0.8, {
           scaleX: 1.05,
           scaleY: 1.05,
@@ -171,7 +172,8 @@
           repeat: 0
           });
       } else {
-        document.getElementById("fill-mask").setAttribute("height", -document.getElementById("fill-mask").getAttribute('height')*maskPercentage/100);
+        document.getElementById("fill-mask").setAttribute("height", document.getElementById("fill-mask").getAttribute('height')*(1-maskPercentage/100));
+        // document.getElementById("fill-mask").setAttribute("height", document.getElementById("fill-mask").getAttribute('height')*maskPercentage/100);
       }
     </script>
     <script src="../lib/moment.js"></script>
