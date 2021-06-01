@@ -56,8 +56,8 @@
           }
           .cls-9 {
             font-size: 16.87px;
-            fill: #24bcff;
-            stroke: #24bcff;
+            fill: #fcc335;
+            stroke: #fcc335;
           }
         </style>
       </defs>
@@ -291,8 +291,14 @@
             d="M187.07,174.84a.24.24,0,0,1,.07.15,1.47,1.47,0,0,1-.28.86.25.25,0,0,1-.23.07l-.52-.16a4.11,4.11,0,0,0-.49-.17,1.83,1.83,0,0,0-1.54.13,1.76,1.76,0,0,0-.56,1.27.71.71,0,0,0,.26.6,1.49,1.49,0,0,0,1,.17l.13,0a5.32,5.32,0,0,1,1.33-.05,2.77,2.77,0,0,1,1.86,1,2,2,0,0,1,.35,1.63,3.66,3.66,0,0,1-1.8,2.49,2.63,2.63,0,0,1-2.25.14,4.08,4.08,0,0,1-2-2,1.07,1.07,0,0,1-.1-.42v-.05l0,0a3.18,3.18,0,0,1,1-.32.2.2,0,0,1,.22.13,2.5,2.5,0,0,0,1.56,1.5.89.89,0,0,0,.8-.09,2.06,2.06,0,0,0,.94-1.89,1,1,0,0,0-.54-.72,1.36,1.36,0,0,0-.49-.11,3.06,3.06,0,0,0-.6,0l-.21,0-.13,0a3.5,3.5,0,0,1-1.78-.15,2.22,2.22,0,0,1-1.22-2.35,2.5,2.5,0,0,1,2.91-2.38A3.29,3.29,0,0,1,187.07,174.84Z"
           />
 
-          <rect fill="none" x="17.87" y="110.08" width="110" height="55" />
-          <text font-size="14pt" fill="#0a0a0a" id="text" class="cls-9 wrap"></text>
+          <!-- static example text (already included) -->
+          <!-- input text -->
+          <rect fill="none" x="33.87" y="40.08" width="90" height="85" />
+          <text id="text" class="cls-2 wrap"></text>
+
+          <!-- analogy text -->
+          <rect fill="none" x="24.87" y="125.08" width="100" height="40" />
+          <text id="analogy" class="cls-9 wrap"></text>
 
         </g>
       </g>  
@@ -306,12 +312,13 @@
           .get("value") / 3592
       ).toFixed(1);
 
-      if (new URL(window.location.href).searchParams.get("unit") == "steps") {
-        document.getElementById("text").textContent = analogy_value + " x the Empire State Building"
-      } else {
-        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
-        " per step of the Empire State Building";
-      }
+      document.getElementById("analogy").textContent = analogy_value + " x the Empire State Building"
+      // if (new URL(window.location.href).searchParams.get("unit") == "steps") {
+      //   document.getElementById("text").textContent = analogy_value + " x the Empire State Building"
+      // } else {
+      //   document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+      //   " per step of the Empire State Building";
+      // }
 
       d3plus
         .textwrap()

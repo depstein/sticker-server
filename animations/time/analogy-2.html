@@ -104,16 +104,21 @@
             ~1 hour,
             <tspan x="0" y="14">30 mins</tspan>
           </text>
+          
           <rect fill="none" x="30" y="35" width="90" height="95"></rect>
-          <text class="cls-5" transform="translate(28.79 84.56)" id="text">
+          <text class="cls-5" id="text"></text>
+          <!-- <text class="cls-5" transform="translate(28.79 84.56)" id="text">
             <tspan id="value"></tspan>
             <tspan id="unit" x="0" y="20"></tspan>
-          </text>
-          <text class="cls-6" transform="translate(28.79 123.26)">
+          </text> -->
+          
+          <rect fill="none" x="28.79" y="123.26" width="71.55" height="46.72"></rect>
+          <text class="cls-6" id="analogy"></text>
+          <!-- <text class="cls-6" transform="translate(28.79 123.26)">
             <tspan id="analogy_text"></tspan>
             <tspan x="0" y="15">time from</tspan>
             <tspan x="0" y="30">LA to SF</tspan>
-          </text>
+          </text> -->
           <path
             class="cls-7"
             d="M185.72,100.52c-2.22-2.84-11.38.62-14.21,2.83,0,0-2.28,1.85-5.73,4.74l-10.15-4a3.31,3.31,0,0,0-5-4.1l-1.6,1.25-.19.18-8.36-3.29a2,2,0,0,0-2,.29l-4.14,3.24a2.06,2.06,0,0,0,0,3.22l18.08,14.71c-4,3.52-8,7.18-11.41,10.52L130.69,126a1.44,1.44,0,0,0-1.4.2l-1.33,1a1.42,1.42,0,0,0,0,2.23l7.72,6.09-.61.69c-2.73,3.18-.7,6.94,3.73,4.78.29-.14.59-.29.88-.45l4.15,9.19a1.42,1.42,0,0,0,2.17.53l1.33-1.05a1.39,1.39,0,0,0,.53-1.3l-1.5-11.18c4.05-2.49,8.55-5.49,12.9-8.5l10,21.28a2.06,2.06,0,0,0,3.13.74l4.14-3.24a2.06,2.06,0,0,0,.77-1.89l-1.18-8.9.22-.14,1.6-1.26a3.31,3.31,0,0,0-2.78-5.83L173.69,118c3.56-2.61,5.85-4.35,5.85-4.35C182.38,111.41,187.94,103.36,185.72,100.52Z"
@@ -229,8 +234,8 @@
           .get("value")
           .split(/ (.*)/)[0] / 5400000
       ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + "x the flight";
+      document.getElementById("analogy").textContent =
+        analogy_value + "x the flight time from LA to SF";
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>

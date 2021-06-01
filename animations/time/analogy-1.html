@@ -92,10 +92,14 @@
         <text class="cls-1" transform="translate(93.92 81.95)">
           ~3 hour, 12 mins
         </text>
-        <text class="cls-2" transform="translate(24.98 131.83)">
+
+        <rect fill="none" style="stroke: #fff" x="24.98" y="131.83" width="81.42" height="33.6"></rect>
+        <text class="cls-2" id="analogy"></text>
+        <!-- <text class="cls-2" transform="translate(24.98 131.83)">
           <tspan id="analogy_text"></tspan>
           <tspan x="0" y="16">NFL game</tspan>
-        </text>
+        </text> -->
+        
         <rect fill="none" x="25" y="45" width="65" height="95"></rect>
         <text class="cls-3" transform="translate(23.06 94.6)" id="text">
           <!-- <tspan id="value"></tspan> -->
@@ -152,8 +156,8 @@
           .get("value")
           .split(/ (.*)/)[0] / 11520000
       ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + "x a normal";
+      document.getElementById("analogy").textContent =
+        analogy_value + "x a normal NFL game";
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>

@@ -77,17 +77,26 @@
           }
         </style>
       </defs>
-      <g id="sticker">
-        <text class="cls-1" transform="translate(23.54 84.56)">
+      <g id="sticker">        
+        <!-- static example text -->
+        <text class="cls-2" transform="translate(121.78 82.71)">~23 songs</text>
+
+        <!-- input text -->
+        <rect fill="none" x="23.54" y="30.56" width="95" height="80" />
+        <text id="text" class="cls-1"></text>
+        <!-- <text class="cls-1" transform="translate(23.54 84.56)">
           <tspan id="value"></tspan> <tspan id="unit"></tspan>
           <tspan id="addiValue" x="0" y="20">The Beatles</tspan>
-        </text>
-        <text class="cls-2" transform="translate(121.78 82.71)">~23 songs</text>
-        <text class="cls-3" transform="translate(25.21 122.33)">
+        </text> -->
+
+        <!-- analogy text -->
+        <rect fill="none" x="25.21" y="126.26" width="85" height="60" />
+        <text id="analogy" class="cls-3"></text>
+        <!-- <text class="cls-3" transform="translate(25.21 122.33)">
           <tspan id="analogy_text"></tspan>
           <tspan x="0" y="15">count of</tspan>
           <tspan x="0" y="30">&quot;Mamma Mia&quot;</tspan>
-        </text>
+        </text> -->
         <path
           class="cls-4"
           d="M144.53,143c-12,0-21.59-3.93-26.27-10.79a93.64,93.64,0,0,0-6-7.37,62.09,62.09,0,0,1-7.81-10.43.51.51,0,0,1,0-.52.5.5,0,0,1,.42-.23h0c.3,0,.62,0,1,0,9.9,0,27.72-12.59,30.26-21.38a.5.5,0,0,1,.38-.35h.1a.46.46,0,0,1,.38.18,54.17,54.17,0,0,1,6.3,10.23,69.52,69.52,0,0,0,5.29,9c5.15,7.53,4.91,18.9-.65,31.2a.51.51,0,0,1-.41.3C146.54,143,145.52,143,144.53,143Zm-15.06-10.41a13.93,13.93,0,0,0,8.12,3.07h0a7.44,7.44,0,0,0,6.25-3.09c1.83-2.55,2.2-6.34,1.08-10.54A18.33,18.33,0,0,1,129.47,132.62Zm-4.57-13.53a4.82,4.82,0,0,0-4,1.93,6.2,6.2,0,0,0-1,4.63,12.7,12.7,0,0,1,8.26-5.65A6.78,6.78,0,0,0,124.9,119.09Zm13.56,3.77c-.09,0-.39.17-.6.84a3.18,3.18,0,0,0-.12.64,10.16,10.16,0,0,0,.58-.94A.76.76,0,0,0,138.46,122.86Zm.16-13.14a4.8,4.8,0,0,0-4,1.93,6.2,6.2,0,0,0-1,4.63,12.68,12.68,0,0,1,8.27-5.65A6.81,6.81,0,0,0,138.62,109.72Z"
@@ -163,12 +172,9 @@
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams.get("value") / 23
       ).toFixed(1);
-      document.getElementById("analogy_text").textContent =
-        analogy_value + "x the song";
-
-      document.getElementById("addiValue").textContent = new URL(
-        window.location.href
-      ).searchParams.get("addiValue");
+      
+      document.getElementById("analogy").textContent = analogy_value + "x the song count of 'Mamma Mia'";
+      // document.getElementById("addiValue").textContent = new URL(window.location.href).searchParams.get("addiValue");
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>

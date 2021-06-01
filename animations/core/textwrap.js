@@ -7,8 +7,8 @@ const GOAL = new URL(window.location.href).searchParams.get("goal") ? new URL(wi
 const STICKER_TYPE = new URL(window.location.href).pathname.replace(/\/.{0,}\//gm, '').replace(/-\d.html/gm, '');
 
 function wrapText() {
-  // if (TIME === "true") 
-  if (DOMAIN === "time")
+  if (TIME === "true") 
+  // if (DOMAIN === "time")
   {
     document.getElementById("text").textContent = processDefaultTimeText(VALUE, UNIT);
     if (STICKER_TYPE === 'chartjunk') 

@@ -568,10 +568,16 @@
           <!-- <text class="cls-13" transform="translate(20.87 173.08)">
             <tspan id="analogy_text"></tspan> <tspan x="0" y="20">Gate Bridge</tspan>
           </text> -->
+          
+          <!-- static example text (already included) -->
 
+          <!-- input text -->
+          <rect fill="none" x="20.87" y="140.08" width="60" height="55" />
+          <text id="text" class="cls-3 wrap"></text>
 
-          <rect fill="none" x="20.87" y="160.08" width="150" height="45" />
-          <text font-size="14pt" fill="#0a0a0a" id="text" class="cls-13 wrap"></text>
+          <!-- analogy text -->
+          <rect fill="none" x="90.87" y="140.08" width="120" height="75" />
+          <text id="analogy" class="cls-13 wrap"></text>
 
         </g>
       </g>
@@ -585,12 +591,13 @@
           .get("value") / 3592
       ).toFixed(1);
 
-      if (new URL(window.location.href).searchParams.get("unit") == "steps") {
-        document.getElementById("text").textContent = analogy_value + " x the Golden Gate Bridge"
-      } else {
-        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
-        " per step of the Golden Gate Bridge";
-      }
+      document.getElementById("analogy").textContent = analogy_value + " x the Golden Gate Bridge"
+      // if (new URL(window.location.href).searchParams.get("unit") == "steps") {
+      //   document.getElementById("text").textContent = analogy_value + " x the Golden Gate Bridge"
+      // } else {
+      //   document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+      //   " per step of the Golden Gate Bridge";
+      // }
 
 
       d3plus

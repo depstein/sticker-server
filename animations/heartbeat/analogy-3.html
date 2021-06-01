@@ -49,7 +49,7 @@
             stroke-miterlimit: 10;
           }
           .cls-5 {
-            font-size: 14.7px;
+            font-size: 13.7px;
             fill: #7d141c;
             stroke: #7d141c;
             stroke-width: 0.5px;
@@ -111,18 +111,28 @@
       </defs>
 
       <g id="sticker">
-        <text class="cls-3" transform="translate(23.54 84.56)">
-          <tspan id="value">108</tspan> beats
-          <tspan id="unit" x="0" y="18">per minute</tspan>
-        </text>
+        <!-- static example text -->
         <text class="cls-4" transform="translate(120.83 82.71)">
           ~75 beats
           <tspan x="-3.35" y="13">per minute</tspan>
         </text>
-        <text class="cls-5" transform="translate(34.54 130.82)">
+
+        <!-- input text -->
+        <rect fill="none" x="23.54" y="70" width="90" height="55" />
+        <text id="text" class="cls-3"></text>
+        <!-- <text class="cls-3" transform="translate(23.54 84.56)">
+          <tspan id="value">108</tspan> beats
+          <tspan id="unit" x="0" y="18">per minute</tspan>
+        </text> -->
+
+        <!-- analogy text -->
+        <rect fill="none" x="23.54" y="130.82" width="82" height="40"></rect>
+        <text id="analogy" class="cls-5 wrap" ></text>
+        
+        <!-- <text class="cls-5" transform="translate(34.54 130.82)">
           <tspan id="analogy_text">1.4x a walking</tspan>
           <tspan x="0" y="13">pace</tspan>
-        </text>
+        </text> -->
         <g class="cls-6">
           <path
             class="cls-7"
@@ -265,15 +275,17 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("text")
+          .get("value")
           .split(/ (.*)/)[0] / 75
       ).toFixed(1);
-      if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
-        document.getElementById("text").textContent = analogy_value + " x a walking pace"
-      } else {
-        document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
-        " per walking pace";
-      }
+      document.getElementById("analogy").textContent = analogy_value + " x a walking pace"
+
+      // if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
+      //   document.getElementById("analogy_text").textContent = analogy_value + " x a walking pace"
+      // } else {
+      //   document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+      //   " per walking pace";
+      // }
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>

@@ -95,13 +95,20 @@
           .cls-17 {
             fill: #31313d;
           }
+          .cls-18 {
+            font-size: 13.09px;
+            fill: #662d91;
+            font-family: Norpeth-HeavyItalic, Norpeth HeavyItalic;
+            font-weight: 800;
+            font-style: italic;
+          } 
           
-          #text {
+          <!-- #text {
             font-size: 19.05px;
             fill: #902d7c;
             stroke: #902d7c;
             font-family: MyDearWatson-Regular, My Dear Watson;
-          }
+          } -->
         </style>
       </defs>
       <g id="sticker">
@@ -204,15 +211,21 @@
           class="cls-17"
           d="M163.68,140.86h0l-3.64-5a.58.58,0,0,0-.88-.09l-3,2.77a.6.6,0,0,0-.08.78l3,4.08a1.71,1.71,0,0,0-.9.33,1.66,1.66,0,0,0-.67.94,1.23,1.23,0,0,0,.17,1,1.19,1.19,0,0,0,.92.48,1.09,1.09,0,0,0,.31,0,1.91,1.91,0,0,0,.79-.32,1.42,1.42,0,0,0,.5-1.95h0l-2.73-3.78,2.91-2.76,2.1,2.9a1.63,1.63,0,0,0-.9.33,1.44,1.44,0,0,0-.5,2,1.23,1.23,0,0,0,.93.49,1.62,1.62,0,0,0,1.11-.32A1.48,1.48,0,0,0,163.68,140.86Zm-3.7-4.07-2.92,2.76-.19-.27,2.93-2.74Z"
         />
-        <text
-          class="cls-18"
-          transform="translate(128.19 148.69) rotate(-58.57)"
-        >
-          Adele
+        <text class="cls-18" transform="translate(128.19 148.69) rotate(-58.57)">Adele</text>
+        
+        <!-- static example text -->
+        <text class="cls-2" transform="translate(126 73.7)">
+          105 beats
+          <tspan x="0" y="12">per minute</tspan>
         </text>
 
-        <rect fill="none" x="24.87" y="92.08" width="50" height="100" />
-        <text font-size="14pt" fill="#0a0a0a" id="text"></text>
+        <!-- input text -->
+        <rect fill="none" x="30.54" y="60" width="90" height="55" />
+        <text id="text" class="cls-4"></text>
+
+        <!-- analogy text -->
+        <rect font-size="14pt" fill="none" x="30.54" y="110" width="55" height="95" />
+        <text id="analogy" class="cls-3"></text>
       </g>
     </svg>
 
@@ -224,12 +237,13 @@
         .get("value") / 105
     ).toFixed(1);
 
-    if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
-      document.getElementById("text").textContent = analogy_value + " x the tempo of 'Rolling in the Deep'"
-    } else {
-      document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
-      " per tempo of 'Rolling in the Deep'";
-    }
+    document.getElementById("analogy").textContent = analogy_value + " x the tempo of 'Rolling in the Deep'";
+    // if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
+    //   document.getElementById("text").textContent = analogy_value + " x the tempo of 'Rolling in the Deep'"
+    // } else {
+    //   document.getElementById("text").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") +
+    //   " per tempo of 'Rolling in the Deep'";
+    // }
 
 
     d3plus
