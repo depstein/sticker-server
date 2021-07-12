@@ -132,7 +132,7 @@
         </text> -->
 
         <!-- analogy text -->
-        <rect font-size="12pt" fill="none" x="20.13" y="117.97" width="75" height="55" />
+        <rect fill="none" x="20.13" y="117.97" width="75" height="55"></rect>
         <text id="analogy" class="cls-8"></text>
         <!-- <text class="cls-8" transform="translate(28.13 117.97)">
           <tspan xml:space="preserve"><tspan id="analogy_text"></tspan></tspan>
@@ -223,7 +223,8 @@
         new URL(window.location.href).searchParams
           .get("value")/11
       ).toFixed(1);
-      document.getElementById("analogy").textContent = analogy_value + "x the song count as '21'";
+      var denominatorDescriptor = analogy_value + " x the song count as '21'";
+      // document.getElementById("analogy").textContent = analogy_value + " x the song count as '21'";
 
       // document.getElementById("addiValue").textContent = new URL(window.location.href).searchParams.get("addiValue");
     </script>

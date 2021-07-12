@@ -234,8 +234,8 @@
           .get("value")
           .split(/ (.*)/)[0] / 5400000
       ).toFixed(1);
-      document.getElementById("analogy").textContent =
-        analogy_value + "x the flight time from LA to SF";
+      var denominatorDescriptor = analogy_value + " x the flight time from LA to SF";
+      // document.getElementById("analogy").textContent = analogy_value + " x the flight time from LA to SF";
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>

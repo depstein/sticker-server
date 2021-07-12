@@ -590,8 +590,8 @@
         new URL(window.location.href).searchParams
           .get("value") / 3592
       ).toFixed(1);
-
-      document.getElementById("analogy").textContent = analogy_value + " x the Golden Gate Bridge"
+      var denominatorDescriptor = analogy_value + " x the Golden Gate Bridge";
+      // document.getElementById("analogy").textContent = analogy_value + " x the Golden Gate Bridge"
       // if (new URL(window.location.href).searchParams.get("unit") == "steps") {
       //   document.getElementById("text").textContent = analogy_value + " x the Golden Gate Bridge"
       // } else {
@@ -600,11 +600,11 @@
       // }
 
 
-      d3plus
-        .textwrap()
-        .container(d3.select("#text"))
-        .resize(false)   
-        .draw();
+      // d3plus
+      //   .textwrap()
+      //   .container(d3.select("#text"))
+      //   .resize(false)   
+      //   .draw();
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>

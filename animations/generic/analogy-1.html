@@ -475,10 +475,10 @@
     <script>
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
-          .get("value") / 930).toFixed(1);
-     
-        document.getElementById("analogy").textContent =
-          analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a horse";
+          .get("value") / 930000).toFixed(1);
+        var denominatorDescriptor = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a horse";
+        // document.getElementById("analogy").textContent =
+        //   analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a horse";
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>

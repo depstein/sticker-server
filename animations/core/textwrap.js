@@ -22,6 +22,8 @@ function wrapText() {
   else 
   {
     document.getElementById("text").textContent = VALUE + " " + UNIT;
+    // I'll just move the text here to fix the line wrap issue.
+    document.getElementById("analogy").textContent = denominatorDescriptor;
     if (STICKER_TYPE === 'chartjunk') 
     {
       document.getElementById("goal").textContent = GOAL;
@@ -30,8 +32,8 @@ function wrapText() {
       } catch (error) {}
     }
   }
-
-
+  
+  
   if (STICKER_TYPE === 'analogy') 
   {
     d3plus

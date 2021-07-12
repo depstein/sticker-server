@@ -241,8 +241,8 @@
         new URL(window.location.href).searchParams
           .get("value") / 525
       ).toFixed(1);
-
-      document.getElementById("analogy").textContent = analogy_value + " x around a track"
+      var denominatorDescriptor = analogy_value + " x around a track";
+      // document.getElementById("analogy").textContent = analogy_value + " x around a track"
       // if (new URL(window.location.href).searchParams.get("unit") == "steps") {
       //   document.getElementById("text").textContent = analogy_value + " x a track"
       // } else {
@@ -250,11 +250,11 @@
       //   " per step of a track";
       // }
 
-      d3plus
-        .textwrap()
-        .container(d3.select("#text"))
-        .resize(false)   
-        .draw();
+      // d3plus
+      //   .textwrap()
+      //   .container(d3.select("#text"))
+      //   .resize(false)   
+      //   .draw();
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>

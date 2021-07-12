@@ -172,8 +172,8 @@
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams.get("value") / 23
       ).toFixed(1);
-      
-      document.getElementById("analogy").textContent = analogy_value + "x the song count of 'Mamma Mia'";
+      var denominatorDescriptor = analogy_value + " x the song count of 'Mamma Mia'";
+      // document.getElementById("analogy").textContent = analogy_value + " x the song count of 'Mamma Mia'";
       // document.getElementById("addiValue").textContent = new URL(window.location.href).searchParams.get("addiValue");
     </script>
     <script src="../lib/moment.js"></script>

@@ -278,7 +278,8 @@
           .get("value")
           .split(/ (.*)/)[0] / 75
       ).toFixed(1);
-      document.getElementById("analogy").textContent = analogy_value + " x a walking pace"
+      var denominatorDescriptor = analogy_value + " x a walking pace";
+      // document.getElementById("analogy").textContent = analogy_value + " x a walking pace";
 
       // if (new URL(window.location.href).searchParams.get("unit") == "beats per minute") {
       //   document.getElementById("analogy_text").textContent = analogy_value + " x a walking pace"

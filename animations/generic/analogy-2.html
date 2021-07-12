@@ -229,9 +229,8 @@
       var analogy_value = parseFloat(
         new URL(window.location.href).searchParams
           .get("value") / 330).toFixed(1);
-      
-      document.getElementById("analogy").textContent =
-        analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a panda bear";
+      var denominatorDescriptor = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a panda bear";
+      // document.getElementById("analogy").textContent = analogy_value + " " + new URL(window.location.href).searchParams.get("unit") + " per pound of a panda bear";
     </script>
     <script src="../lib/moment.js"></script>
     <script src="../core/timeparser.js"></script>
