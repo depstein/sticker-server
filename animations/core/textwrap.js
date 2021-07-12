@@ -17,19 +17,22 @@ function wrapText() {
       try {
         document.getElementById("midpoint").textContent = processDefaultTimeText(GOAL / 2, UNIT);
       } catch (error) {}
+    } else if (STICKER_TYPE === 'analogy') {
+      document.getElementById("analogy").textContent = denominatorDescriptor;
     }
   }
   else 
   {
     document.getElementById("text").textContent = VALUE + " " + UNIT;
     // I'll just move the text here to fix the line wrap issue.
-    document.getElementById("analogy").textContent = denominatorDescriptor;
     if (STICKER_TYPE === 'chartjunk') 
     {
       document.getElementById("goal").textContent = GOAL;
       try {
         document.getElementById("midpoint").textContent = GOAL / 2;
       } catch (error) {}
+    } else if (STICKER_TYPE === 'analogy') {
+      document.getElementById("analogy").textContent = denominatorDescriptor;
     }
   }
   
